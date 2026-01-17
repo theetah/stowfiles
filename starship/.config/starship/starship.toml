@@ -1,0 +1,153 @@
+format = """
+[▍]\
+(fg:overlay_bg2)\
+$sudo\
+$directory\
+$character\
+"""
+
+right_format = """
+$cmd_duration\
+$jobs\
+$git_branch\
+$git_status
+$status\
+"""
+
+# [🮈]\
+# (fg:overlay_bg2)\
+# """
+
+palette = "tomorrow_night"
+
+[palettes.tomorrow_night]
+prompt_fg = '#eeeeee'
+text_fg = '#c5c8c6' # fg for more important elements, too dim to use on prompt itself
+background = '#1d1f21'
+# OVERLAYS (background color of elements that are slightly lighter than terminal bg)
+overlay_bg1 = '#282a2e'
+overlay_bg2 = '#323435'
+overlay_fg1 = '#5a5c5a'
+overlay_fg2 = '#858886'
+# generic colors
+red = '#cc6666' # generally used for errors
+orange = '#de935f'
+yellow = '#f0c674'
+green = '#b5bd68'
+blue = '#81a2be'
+purple = '#b294bb'
+
+[palettes.catppuccin_macchiato]
+rosewater = "#f4dbd6"
+flamingo = "#f0c6c6"
+pink = "#f5bde6"
+mauve = "#c6a0f6"
+red = "#ed8796"
+maroon = "#ee99a0"
+peach = "#f5a97f"
+yellow = "#eed49f"
+green = "#a6da95"
+teal = "#8bd5ca"
+sky = "#91d7e3"
+sapphire = "#7dc4e4"
+blue = "#8aadf4"
+lavender = "#b7bdf8"
+white = "#ffffff"
+text = "#cad3f5"
+subtext1 = "#b8c0e0"
+subtext0 = "#a5adcb"
+overlay2 = "#939ab7"
+overlay1 = "#8087a2"
+overlay0 = "#6e738d"
+surface2 = "#5b6078"
+surface1 = "#494d64"
+surface0 = "#363a4f"
+base = "#24273a"
+mantle = "#1e2030"
+crust = "#181926"
+
+[palettes.kanagawa]
+lightest_background = '#3c3c4d'
+lighter_background = '#2e2e3b'
+dark_blue = '#5e75a3'
+dark_purple = '#645e73'
+err_red = '#ab4642'
+red = '#e55561'
+orange = '#FFA066'
+yellow = '#C0A36E'
+green = '#76946A'
+teal = '#6A9589'
+blue = '#7E9CD8'
+purple = '#957FB8'
+white = '#DCD7BA'
+light_gray = '#C8C093'
+gray = '#727169'
+black = '#16161D'
+bright_red = '#FF5D62'
+bright_yellow = '#e0b460'
+bright_green = '#98BB6C'
+bright_blue = '#7FB4CA'
+pale_purple = '#938AA9'
+
+### LEFT PROMPT
+
+[sudo]
+symbol = 's'
+style = 'fg:yellow'
+format = '[\[$symbol\] ]($style)'
+disabled = false
+
+[os]
+style = 'fg:prompt_fg'
+format = '[$symbol ]($style)'
+disabled = false
+
+[os.symbols]
+Fedora = ''
+
+[directory]
+style = 'fg:green'
+format = '[$path ]($style)'
+truncation_length = 3
+truncation_symbol = '…/'
+fish_style_pwd_dir_length = 3
+
+### RIGHT PROMPT
+
+[cmd_duration]
+style = 'fg:overlay_fg1'
+format = '[$duration]($style)'
+# min_time = 0
+# show_milliseconds = true
+
+[jobs]
+number_threshold = 1
+symbol = ''
+style = 'fg:blue'
+format = '[$symbol $number ]($style)'
+
+[git_branch]
+symbol = ''
+style = "bg:background"
+format = '(fg:overlay_bg1)[[@$branch](fg:prompt_fg)]($style)'
+
+[git_status]
+# style = "bg:background"
+modified = '[󰇂](fg:yellow)'
+deleted = '[󰍴](fg:red)'
+format = '( \[$all_status\])'
+
+[fill]
+symbol = '▁'
+style = 'fg:overlay_bg1'
+
+[status]
+style = 'red'
+format = ' [\[($status)(, $common_meaning)\]]($style)'
+disabled = false
+
+# toml will not calm down unless this part is put last
+[character]
+format = '$symbol '
+success_symbol = '\$'
+error_symbol = '[\$](red)'
