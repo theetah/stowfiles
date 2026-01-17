@@ -1,9 +1,8 @@
 # is bash the best language for this? probably not. too bad!
 
-if [ -d ~/stowfiles ]; then
-else
+if [ ! -d ~/stowfiles ]; then
   echo "repo was cloned incorrectly; parent this repo to home directory."
-  return 1
+  exit 1
 fi
 
 stowed=("bat", "fish", "kitty", "nvim", "starship")
@@ -30,7 +29,7 @@ done
 
 # go figure
 if ! $prerequisites_installed; then
-  return 1
+  exit 1
 fi
 
 echo "stowing items..."
@@ -44,4 +43,4 @@ done
 echo "---"
 echo "Program done!"
 # probably don't need the below line, but just in case.
-return 0
+exit 0
