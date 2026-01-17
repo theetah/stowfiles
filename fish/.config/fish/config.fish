@@ -16,11 +16,11 @@ end
 
 alias fp "flatpak"
 alias py "python3"
-alias ls "lsd"
-alias la "lsd -A"
-alias lsa "lsd -lA"
-alias cat "bat"
-alias helix "hx"
+# alias ls "lsd"
+# alias la "lsd -A"
+# alias lsa "lsd -lA"
+# alias cat "bat"
+# alias helix "hx"
 # alias mint "env -u WAYLAND_DISPLAY /usr/bin/"
 
 set fish_greeting ''

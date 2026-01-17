@@ -5,8 +5,8 @@ if [ ! -d ~/stowfiles ]; then
   exit 1
 fi
 
-stowed=("bat" "fish" "kitty" "nvim" "starship")
-not_stowed=("stow" "lsd")
+stowed=("fish" "kitty" "nvim" "starship")
+not_stowed=("stow")
 prerequisites_installed=true
 
 # check if all items in stowed are installed
