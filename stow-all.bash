@@ -10,18 +10,18 @@ not_stowed=("stow", "lsd")
 prerequisites_installed=true
 
 # check if all items in stowed are installed
-for item in stowed
+for item in ${stowed[*]}
 do
-  if ! command -v "$item" >/dev/null 2>&1; then
+  if ! command -v $item >/dev/null 2>&1; then
     echo "error: $item is not installed"
     prerequisites_installed=false
   fi
 done
 
 # check if all items in not_stowed are installed
-for item in not_stowed
+for item in ${not_stowed[*]}
 do
-  if ! command -v "$item" >/dev/null 2>&1; then
+  if ! command -v $item >/dev/null 2>&1; then
     echo "error: $item is not installed"
     prerequisites_installed=false
   fi
