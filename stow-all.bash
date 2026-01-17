@@ -34,7 +34,7 @@ fi
 
 echo "stowing items..."
 echo "---"
-for item in stowed
+for item in ${stowed[*]}
 do
   stow "$item"
   echo "$item stowed"
