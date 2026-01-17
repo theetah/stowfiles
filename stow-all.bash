@@ -13,7 +13,7 @@ prerequisites_installed=true
 for item in stowed
 do
   if ! command -v "$item" >/dev/null 2>&1; then
-    echo "error: {$item} is not installed"
+    echo "error: $item is not installed"
     prerequisites_installed=false
   fi
 done
@@ -22,7 +22,7 @@ done
 for item in not_stowed
 do
   if ! command -v "$item" >/dev/null 2>&1; then
-    echo "error: {$item} is not installed"
+    echo "error: $item is not installed"
     prerequisites_installed=false
   fi
 done
@@ -37,7 +37,7 @@ echo "---"
 for item in stowed
 do
   stow "$item"
-  echo "{$item} stowed"
+  echo "$item stowed"
 done
 
 echo "---"
