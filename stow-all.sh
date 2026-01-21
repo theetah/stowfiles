@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # is bash the best language for this? probably not. too bad!
 
 if [ ! -d ~/stowfiles ]; then
