@@ -12,6 +12,7 @@ $jobs\
 $git_branch\
 $git_status
 $status\
+$shell\
 """
 
 # [🮈]\
@@ -116,7 +117,7 @@ fish_style_pwd_dir_length = 3
 
 [cmd_duration]
 style = 'fg:overlay_fg1'
-format = '[ $duration]($style)'
+format = '[$duration]($style)'
 # min_time = 0
 # show_milliseconds = true
 
@@ -124,12 +125,12 @@ format = '[ $duration]($style)'
 number_threshold = 1
 symbol = ''
 style = 'fg:blue'
-format = '[ $symbol $number]($style)'
+format = '[$symbol $number ]($style)'
 
 [git_branch]
 symbol = ''
 style = "bg:background"
-format = '(fg:overlay_bg1)[ [@$branch](fg:prompt_fg)]($style)'
+format = '(fg:overlay_bg1)[[@$branch](fg:prompt_fg)]($style)'
 
 [git_status]
 # style = "bg:background"
@@ -146,8 +147,18 @@ style = 'red'
 format = ' [\[($status)(, $common_meaning)\]]($style)'
 disabled = false
 
+[shell]
+style = 'fg:purple'
+format = '[ $indicator]($style)'
+# bash_indicator tends to not work for some reason :c
+bash_indicator = ' '
+fish_indicator = ' '
+zsh_indicator = '%_'
+unknown_indicator = '?'
+disabled = false
+
 # toml will not calm down unless this part is put last
 [character]
 format = '$symbol '
-success_symbol = '\$'
-error_symbol = '[\$](red)'
+success_symbol = "\\$"
+error_symbol = "[\\$](red)"

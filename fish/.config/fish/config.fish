@@ -26,6 +26,7 @@ alias py "python3"
 set fish_greeting ''
 set -gx EDITOR /usr/local/bin/nvim
 
+# export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml:$HOME/.config/starship/fish.toml"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 export BAT_THEME="Tomorrow-Night"
 export JAVA_HOME="/usr/lib/jvm/java-21-openjdk/"

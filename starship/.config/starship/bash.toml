@@ -1,0 +1,4 @@
+[character]
+format = '$symbol '
+success_symbol = "\\$"
+error_symbol = "[\\$](red)"
