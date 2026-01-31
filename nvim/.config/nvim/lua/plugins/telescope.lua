@@ -58,6 +58,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
           "%.ttf",
           "%.otf",
         },
+        layout_config = {
+          preview_width = 0.65,
+        },
         -- mappings = {
         --   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         -- },

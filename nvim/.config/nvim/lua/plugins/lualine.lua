@@ -48,6 +48,8 @@ return {
       cond = function()
         return get_submode() == "DEBUG"
       end,
+      right_padding = 0,
+      left_padding = 0,
     }
 
     local opts = {
@@ -71,10 +73,10 @@ return {
         },
 
         lualine_b = { debug_status, "filename" },
-        lualine_c = { navic },
+        lualine_c = { "filetype" },
 
         lualine_x = {
-          "filetype",
+          -- navic,
         },
 
         lualine_y = {

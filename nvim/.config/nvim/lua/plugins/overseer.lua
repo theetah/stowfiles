@@ -5,6 +5,16 @@ return {
   opts = {},
   dependencies = { "leath-dub/snipe.nvim" },
   init = function()
+    --[[
+    -- TODO: replace Snipe with a more "command palette"-esque approach using Telescope/base implementation
+    -- FIRST IDEA:
+    --    Space+rt -> "Run Task". Might also be Ctrl+Shift+p. Will open the :OverseerRun Menu.
+    --    Space+o  -> "Toggle Overseer". Self-explanatory, though we might need an additional keybind for TaskAction.
+    -- SECOND IDEA:
+    --    Ctrl+Shift+p -> Open (telescope?) menu to select TaskAction or Run Task.
+    --        Add additional commands in the future? (would likely require custom directory)
+    --    Space+o      -> "Toggle Overseer". Self-explanatory.
+    --]]
     local menu = require("snipe.menu"):new({ position = "center" })
     local function set_keymaps(m)
       vim.keymap.set("n", "<esc>", function()

@@ -34,6 +34,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   -- DO THIS AFTER ALL PLUGINS HAVE BEEN ORGANIZED
   spec = { { import = "plugins" } },
+  change_detection = { enabled = false, notify = false },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the

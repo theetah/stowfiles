@@ -18,27 +18,28 @@ return {
   -- },
   config = function()
     vim.cmd.colorscheme("base16-tomorrow-night")
+    local set_hl = vim.api.nvim_set_hl
     -- base colorscheme tweaks
-    -- vim.api.nvim_set_hl(0, "LineNr", { bg = "#282a2e" })
-    -- vim.api.nvim_set_hl(0, "CursorLine", { bg = "#1d1f21" })
-    vim.api.nvim_set_hl(0, "MatchParen", { bg = "#585958" })
-    -- vim.api.nvim_set_hl(0, "SignColumn", { bg = "#282a2e" })
-    -- vim.api.nvim_set_hl(0, "GitGutterAdd", { bg = "#282a2e", fg = "#b5bd68" })
-    -- vim.api.nvim_set_hl(0, "GitGutterDelete", { bg = "#282a2e", fg = "#81a2be" })
-    -- vim.api.nvim_set_hl(0, "GitGutterChange", { bg = "#282a2e", fg = "#cc6666" })
-    -- vim.api.nvim_set_hl(0, "GitGutterChangeDelete", { bg = "#282a2e", fg = "#b294bb" })
+    -- set_hl(0, "LineNr", { bg = "#282a2e" })
+    -- set_hl(0, "CursorLine", { bg = "#1d1f21" })
+    set_hl(0, "MatchParen", { bg = "#585958" })
+    -- set_hl(0, "SignColumn", { bg = "#282a2e" })
+    -- set_hl(0, "GitGutterAdd", { bg = "#282a2e", fg = "#b5bd68" })
+    -- set_hl(0, "GitGutterDelete", { bg = "#282a2e", fg = "#81a2be" })
+    -- set_hl(0, "GitGutterChange", { bg = "#282a2e", fg = "#cc6666" })
+    -- set_hl(0, "GitGutterChangeDelete", { bg = "#282a2e", fg = "#b294bb" })
     -- NOTE: so... lualine won't unlink the hl groups for command & normal,
     -- even when I declare them within the importing file... why is it designed like this?!
-    -- vim.api.nvim_set_hl(0, "lualine_a_command", { fg = "#282a2e", bg = "#f0c674" })
+    -- set_hl(0, "lualine_a_command", { fg = "#282a2e", bg = "#f0c674" })
 
     -------------------
     -- plugins below --
     -------------------
     -- indent-blankline
-    vim.api.nvim_set_hl(0, "IndentBlanklineUnfocused", { fg = "#323332" })
-    vim.api.nvim_set_hl(0, "IndentBlanklineFocused", { fg = "#858886" })
+    set_hl(0, "IndentBlanklineUnfocused", { fg = "#323332" })
+    set_hl(0, "IndentBlanklineFocused", { fg = "#858886" })
     -- nvim-cmp
-    vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#323435", fg = "#81a2be" })
+    set_hl(0, "PmenuSel", { bg = "#323435", fg = "#81a2be" })
     -- mini.tabline
     -- - `MiniTablineCurrent` - buffer is current (has cursor in it). fg=#b5bd68 bg=#282a2e
     -- - `MiniTablineVisible` - buffer is visible (displayed in some window). fg=#b5bd68 bg=#282a2e
@@ -49,10 +50,33 @@ return {
     -- - `MiniTablineFill` - unused right space of tabline. fg=#c5c8c6 bg=#1d1f21
     -- - `MiniTablineTabpagesection` - section with tabpage information.
     -- - `MiniTablineTrunc` - truncation symbols indicating more left/right tabs.
-    vim.api.nvim_set_hl(0, "MiniTablineCurrent", { fg = "#c5c8c6", bg = "#373b41" })
-    vim.api.nvim_set_hl(0, "MiniTablineVisible", { link = "MiniTablineCurrent" })
-    vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent", { fg = "#f0c674", bg = "#373b41" })
-    vim.api.nvim_set_hl(0, "MiniTablineModifiedVisible", { link = "MiniTablineModifiedCurrent" })
-    vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { fg = "#f0c674", bg = "#282a2e" })
+    local MiniTablineColors = {
+      fg_active = "#c5c8c6",
+      fg_inactive = "#969896",
+      fg_modified = "#f0c674",
+      bg_active = "#373b41",
+      bg_inactive = "#282a2e",
+    }
+    set_hl(0, "MiniTablineCurrent", {
+      fg = MiniTablineColors.fg_active,
+      bg = MiniTablineColors.bg_active,
+      underline = true,
+    })
+    set_hl(
+      0,
+      "MiniTablineVisible",
+      { fg = MiniTablineColors.fg_active, bg = MiniTablineColors.bg_active, underdotted = true }
+    )
+    set_hl(
+      0,
+      "MiniTablineModifiedCurrent",
+      { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_active, underline = true }
+    )
+    set_hl(
+      0,
+      "MiniTablineModifiedVisible",
+      { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_active, underdotted = true }
+    )
+    set_hl(0, "MiniTablineModifiedHidden", { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_inactive })
   end,
 }

@@ -13,7 +13,7 @@ return {
       Class = " ",
       Field = " ",
     },
-    separator = "   ",
+    -- separator = "   ",
   },
   -- init = function()
   --   vim.o.winbar = "%{%luaeval('vim.fs.basename(vim.api.nvim_buf_get_name(0))')%}"
