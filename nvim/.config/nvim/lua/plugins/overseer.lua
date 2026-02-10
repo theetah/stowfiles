@@ -1,9 +1,9 @@
 return {
   "stevearc/overseer.nvim",
+  lazy = false,
   ---@module 'overseer'
   ---@type overseer.SetupOpts
   opts = {},
-  dependencies = { "leath-dub/snipe.nvim" },
   init = function()
     --[[
     -- TODO: replace Snipe with a more "command palette"-esque approach using Telescope/base implementation
@@ -15,33 +15,39 @@ return {
     --        Add additional commands in the future? (would likely require custom directory)
     --    Space+o      -> "Toggle Overseer". Self-explanatory.
     --]]
-    local menu = require("snipe.menu"):new({ position = "center" })
-    local function set_keymaps(m)
-      vim.keymap.set("n", "<esc>", function()
-        m:close()
-      end, { nowait = true, buffer = m.buf })
-    end
 
-    menu:add_new_buffer_callback(set_keymaps)
+    vim.keymap.set("n", "<leader>o", "<cmd>OverseerToggle<cr>", { desc = "Toggle Overseer" })
 
-    vim.keymap.set("n", "<leader>o", function()
-      local items = {
-        -- "Open",
-        -- "Close",
-        "Run",
-        "Toggle",
-        "TaskAction",
-        "Shell",
-      }
-      menu.config.open_win_override.title = "Overseer Commands"
-      menu:open(items, function(m, i)
-        m:close()
-        -- print("running " .. m.items[i])
-        vim.cmd("Overseer" .. m.items[i])
-        -- vim.api.nvim_set_current_buf(m.items[i].id)
-      end, function(item)
-        return item
+    -- TODO: probably implement using this shit
+    --[[
+        vim.ui.select({ "tabs", "spaces" }, {
+          prompt = "Select tabs or spaces:",
+          format_item = function(item)
+            return "I'd like to choose " .. item
+          end,
+        }, function(choice)
+          if choice == "spaces" then
+            vim.o.expandtab = true
+          else
+            vim.o.expandtab = false
+          end
+        end)
+    ]]
+
+    -- This is an awful implementation; I wanted to have all the available commands + Task Action listed...
+    vim.keymap.set("n", "<leader>p", function()
+      vim.ui.select({ "Run", "Action" }, {
+        prompt = "Overseer",
+        format_item = function(item)
+          return item
+        end,
+      }, function(choice, _)
+        if choice == "Run" then
+          vim.api.nvim_command("OverseerRun")
+        elseif choice == "Action" then
+          vim.api.nvim_command("OverseerTaskAction")
+        end
       end)
-    end)
+    end, { desc = "Run an Overseer Command" })
   end,
 }

@@ -40,6 +40,9 @@ return { -- Collection of various small independent plugins/modules
     vim.keymap.set("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "previous buffer" })
     vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "delete current buffer" })
 
+    require("mini.move").setup()
+    require("mini.cmdline").setup()
+
     -- ... and there is more!
     --  Check out: https://github.com/echasnovski/mini.nvim
   end,

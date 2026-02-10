@@ -59,7 +59,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
           "%.otf",
         },
         layout_config = {
-          preview_width = 0.65,
+          -- preview_width = 0.65,
         },
         -- mappings = {
         --   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
@@ -82,7 +82,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
     vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
     vim.keymap.set("n", "<leader>ff", function()
-      builtin.find_files({ hidden = true })
+      builtin.find_files({ hidden = false })
     end, { desc = "[F]ind [F]iles" })
     -- vim.keymap.set("n", "<leader>fs", builtin.builtin, { desc = "[F]ind [S]elect Telescope" })
     vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
@@ -93,7 +93,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set("n", "<leader>/", function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
       builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-        winblend = 10,
+        winblend = 0,
         previewer = false,
       }))
     end, { desc = "[/] Fuzzily search in current buffer" })

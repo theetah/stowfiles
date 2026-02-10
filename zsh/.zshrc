@@ -4,7 +4,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd extendedglob nomatch notify
 unsetopt beep
-bindkey -v
+# bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/hache/.zshrc'
@@ -18,12 +18,19 @@ compinit
 #####################
 
 # Exports
+export PATH=$HOME/.local/bin:$PATH
+export BAT_THEME="Tomorrow-Night"
 export EDITOR="/usr/local/bin/nvim"
 
 # Aliases
 alias ls='lsd'
 alias la='lsd -A'
-# alias cat='bat'
+alias fp='flatpak'
+alias cat='bat'
+
+# Keybinds
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
 ############################
 ### PLUGIN MANAGER SETUP ###

@@ -51,32 +51,29 @@ return {
     -- - `MiniTablineTabpagesection` - section with tabpage information.
     -- - `MiniTablineTrunc` - truncation symbols indicating more left/right tabs.
     local MiniTablineColors = {
-      fg_active = "#c5c8c6",
-      fg_inactive = "#969896",
+      fg_current = "#c5c8c6",
+      fg_visible = "#969896",
       fg_modified = "#f0c674",
-      bg_active = "#373b41",
-      bg_inactive = "#282a2e",
+      bg_current = "#373b41",
+      bg_visible = "#282a2e",
+      bg_hidden = "#17191a",
     }
     set_hl(0, "MiniTablineCurrent", {
-      fg = MiniTablineColors.fg_active,
-      bg = MiniTablineColors.bg_active,
-      underline = true,
+      fg = MiniTablineColors.fg_current,
+      bg = MiniTablineColors.bg_current,
     })
     set_hl(
       0,
-      "MiniTablineVisible",
-      { fg = MiniTablineColors.fg_active, bg = MiniTablineColors.bg_active, underdotted = true }
+      "MiniTablineHidden",
+      { fg = MiniTablineColors.fg_visible, bg = MiniTablineColors.bg_hidden, italic = true }
     )
+    set_hl(0, "MiniTablineVisible", { fg = MiniTablineColors.fg_visible, bg = MiniTablineColors.bg_visible })
+    set_hl(0, "MiniTablineModifiedCurrent", { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_current })
+    set_hl(0, "MiniTablineModifiedVisible", { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_visible })
     set_hl(
       0,
-      "MiniTablineModifiedCurrent",
-      { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_active, underline = true }
+      "MiniTablineModifiedHidden",
+      { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_hidden, italic = true }
     )
-    set_hl(
-      0,
-      "MiniTablineModifiedVisible",
-      { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_active, underdotted = true }
-    )
-    set_hl(0, "MiniTablineModifiedHidden", { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_inactive })
   end,
 }
