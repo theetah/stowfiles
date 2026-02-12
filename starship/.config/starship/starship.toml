@@ -1,10 +1,10 @@
 format = """
-[▍]\
-(fg:overlay_bg2)\
 $sudo\
 $directory\
 $character\
 """
+# [▍]\
+# (fg:overlay_bg2)\
 
 right_format = """
 $cmd_duration\
@@ -12,8 +12,9 @@ $jobs\
 $git_branch\
 $git_status
 $status\
-$shell\
 """
+
+add_newline = false
 
 # [🮈]\
 # (fg:overlay_bg2)\
@@ -98,6 +99,7 @@ style = 'fg:yellow'
 format = '[\[$symbol\] ]($style)'
 disabled = false
 
+# NOTE: currently unused
 [os]
 style = 'fg:prompt_fg'
 format = '[$symbol ]($style)'
@@ -124,18 +126,21 @@ format = '[$duration]($style)'
 [jobs]
 number_threshold = 1
 symbol = ''
-style = 'fg:blue'
-format = '[$symbol $number ]($style)'
+style = 'fg:orange'
+format = '[ $symbol $number]($style)'
 
 [git_branch]
-symbol = ''
-style = "bg:background"
-format = '(fg:overlay_bg1)[[@$branch](fg:prompt_fg)]($style)'
+symbol = '@'
+style = 'fg:prompt_fg'
+format = '[ $symbol$branch]($style)'
 
 [git_status]
-# style = "bg:background"
-modified = '[󰇂](fg:yellow)'
+# style = 'bg:background'
+modified = '[󰇂 ](fg:yellow)'
 deleted = '[󰍴](fg:red)'
+stashed = '[󱓾 ](fg:orange)'
+untracked = '[󰝒 ](fg:green)'
+renamed = '[󰜢 ](fg:orange)'
 format = '( \[$all_status\])'
 
 [fill]
@@ -151,11 +156,11 @@ disabled = false
 style = 'fg:purple'
 format = '[ $indicator]($style)'
 # bash_indicator tends to not work for some reason :c
-bash_indicator = ' '
+bash_indicator = ' ' # NOTE: only works with ble.sh framework installed
 fish_indicator = ' '
 zsh_indicator = '%_'
 unknown_indicator = '?'
-disabled = false
+disabled = true # NOTE: currently disabled and unused
 
 # toml will not calm down unless this part is put last
 [character]
