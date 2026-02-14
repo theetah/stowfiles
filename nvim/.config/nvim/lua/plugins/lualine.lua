@@ -73,28 +73,31 @@ return {
         },
 
         lualine_b = { debug_status, "filename" },
-        lualine_c = { "filetype" },
+        lualine_c = { "filetype", "encoding" },
 
         lualine_x = {
           -- navic,
         },
 
         lualine_y = {
-          "diagnostics",
+          {
+            "diagnostics",
+            symbols = { error = "E", warn = "W", info = "I", hint = "H" },
+          },
           "lsp_status",
           -- lsp,
         },
 
         lualine_z = {
           "branch",
-          { "progress", separator = { left = left_separator, right = right_separator }, left_padding = 2 },
+          "progress",
         },
       },
 
       inactive_sections = {
         lualine_a = {},
         lualine_b = { "filename" },
-        lualine_c = {},
+        lualine_c = { "filetype", "encoding" },
         lualine_x = {},
         lualine_y = {},
         lualine_z = { "branch", "progress" },
