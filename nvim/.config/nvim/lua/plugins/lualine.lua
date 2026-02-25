@@ -80,10 +80,7 @@ return {
         },
 
         lualine_y = {
-          {
-            "diagnostics",
-            symbols = { error = "E", warn = "W", info = "I", hint = "H" },
-          },
+          "diagnostics",
           "lsp_status",
           -- lsp,
         },
