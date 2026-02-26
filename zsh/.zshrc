@@ -13,9 +13,9 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-#####################
-### USER STUFF(?) ###
-#####################
+###################
+### USER CONFIG ###
+###################
 
 # Exports
 export PATH=$HOME/.local/bin:$PATH
@@ -23,14 +23,44 @@ export BAT_THEME="Tomorrow-Night"
 export EDITOR="/usr/local/bin/nvim"
 
 # Aliases
-alias ls='lsd'
-alias la='lsd -A'
-alias fp='flatpak'
-alias cat='bat'
+# Ordinary aliases to be added :p
+
+# Conditional Aliases
+
+# Considering whether or not to put this here or at exports
+export ALIAS_WARNINGS=true
+
+# Only works for very limited scenarios
+# i.e. cannot alias "ls" to "lsd -A"
+alias_if_exists () {
+  if command -v "$2" >/dev/null 2>&1; then
+    alias "$1"="$2"
+  elif [[ "$ALIAS_WARNINGS" == true ]]; then
+    echo "command $2 DNE"
+  fi
+}
+
+# You can technically not use quotation marks,
+# but I think this makes it look a lot neater.
+
+# Note: below won't work on Ubuntu-based systems, due to package naming.
+alias_if_exists "cat" "bat"
+alias_if_exists "fp" "flatpak"
+
+# You do not want to implement array logic in
+# the alias_if_exists function. Trust me.
+if command -v lsd >/dev/null 2>&1; then
+  alias ls="lsd"
+  alias la="lsd -A"
+fi
 
 # Keybinds
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+# Miscellaneous
+autoload -U select-word-style
+select-word-style bash
 
 ############################
 ### PLUGIN MANAGER SETUP ###
@@ -72,5 +102,5 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=245'
 
 # uncomment when starship supports multiple config files
 # export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml:-$HOME/.config/starship/zsh.toml"
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+export STARSHIP_CONFIG="$HOME/.config/starship/zsh.toml"
 eval "$(starship init zsh)"
