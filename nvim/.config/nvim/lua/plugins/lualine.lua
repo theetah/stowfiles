@@ -103,6 +103,7 @@ return {
       extensions = { "trouble", "nvim-dap-ui", "lazy", "neo-tree", "toggleterm" },
     }
 
+    -- Allow submode events to update the statusline
     vim.api.nvim_create_autocmd("User", {
       group = vim.api.nvim_create_augroup("user-event", {}),
       pattern = { "SubmodeEnterPre", "SubmodeEnterPost", "SubmodeLeavePre", "SubmodeLeavePost" },
