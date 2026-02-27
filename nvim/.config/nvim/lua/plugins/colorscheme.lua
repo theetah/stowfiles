@@ -23,7 +23,7 @@ return {
     -- set_hl(0, "LineNr", { bg = "#282a2e" })
     -- set_hl(0, "CursorLine", { bg = "#1d1f21" })
     set_hl(0, "MatchParen", { bg = "#585958" })
-    set_hl(0, "NormalFloat", { bg = "#232629" })
+    -- set_hl(0, "NormalFloat", { bg = "#232629" })
     -- set_hl(0, "SignColumn", { bg = "#282a2e" })
     -- set_hl(0, "GitGutterAdd", { bg = "#282a2e", fg = "#b5bd68" })
     -- set_hl(0, "GitGutterDelete", { bg = "#282a2e", fg = "#81a2be" })

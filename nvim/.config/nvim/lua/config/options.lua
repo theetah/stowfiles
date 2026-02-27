@@ -72,6 +72,7 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
     },
   },
+  float = { focusable = false },
 })
 
 -- ### User-defined Commands ###
