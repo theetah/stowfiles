@@ -35,7 +35,7 @@ return {
     ]]
 
     -- This is an awful implementation; I wanted to have all the available commands + Task Action listed...
-    vim.keymap.set("n", "<leader>p", function()
+    vim.keymap.set("n", "<leader><leader>", function()
       vim.ui.select({ "Run", "Action" }, {
         prompt = "Overseer",
         format_item = function(item)

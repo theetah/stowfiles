@@ -95,7 +95,7 @@ return {
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
-        map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+        map("cn", vim.lsp.buf.rename, "[C]hange [N]ame")
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
@@ -205,7 +205,7 @@ return {
       },
       quick_lint_js = {},
       stylua = {},
-      ty = {},
+      -- ty = {},
       vtsls = {},
     }
 

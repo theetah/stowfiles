@@ -2,8 +2,8 @@ return {
   "lukas-reineke/indent-blankline.nvim",
   main = "ibl",
   opts = {
-    indent = { highlight = { "IndentBlanklineUnfocused" } },
-    scope = { highlight = { "IndentBlanklineFocused" } },
+    -- indent = { highlight = { "IndentBlanklineUnfocused" } },
+    -- scope = { highlight = { "IndentBlanklineFocused" } },
   },
   -- config = function()
   --   -- Kind of messy but it works

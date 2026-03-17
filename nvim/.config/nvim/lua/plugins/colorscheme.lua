@@ -17,12 +17,12 @@ return {
   --   },
   -- },
   config = function()
-    vim.cmd.colorscheme("base16-tomorrow-night")
+    vim.cmd.colorscheme("base16-decaf")
     local set_hl = vim.api.nvim_set_hl
     -- base colorscheme tweaks
     -- set_hl(0, "LineNr", { bg = "#282a2e" })
     -- set_hl(0, "CursorLine", { bg = "#1d1f21" })
-    set_hl(0, "MatchParen", { bg = "#585958" })
+    -- set_hl(0, "MatchParen", { bg = "#585958" })
     -- set_hl(0, "NormalFloat", { bg = "#232629" })
     -- set_hl(0, "SignColumn", { bg = "#282a2e" })
     -- set_hl(0, "GitGutterAdd", { bg = "#282a2e", fg = "#b5bd68" })
@@ -37,10 +37,10 @@ return {
     -- plugins below --
     -------------------
     -- indent-blankline
-    set_hl(0, "IndentBlanklineUnfocused", { fg = "#323332" })
-    set_hl(0, "IndentBlanklineFocused", { fg = "#858886" })
+    -- set_hl(0, "IndentBlanklineUnfocused", { fg = "#323332" })
+    -- set_hl(0, "IndentBlanklineFocused", { fg = "#858886" })
     -- nvim-cmp
-    set_hl(0, "PmenuSel", { bg = "#323435", fg = "#81a2be" })
+    set_hl(0, "PmenuSel", { bg = "#515151", fg = "#90bee1" })
     -- mini.tabline
     -- - `MiniTablineCurrent` - buffer is current (has cursor in it). fg=#b5bd68 bg=#282a2e
     -- - `MiniTablineVisible` - buffer is visible (displayed in some window). fg=#b5bd68 bg=#282a2e
@@ -52,12 +52,12 @@ return {
     -- - `MiniTablineTabpagesection` - section with tabpage information.
     -- - `MiniTablineTrunc` - truncation symbols indicating more left/right tabs.
     local MiniTablineColors = {
-      fg_current = "#c5c8c6",
-      fg_visible = "#969896",
-      fg_modified = "#f0c674",
-      bg_current = "#373b41",
-      bg_visible = "#282a2e",
-      bg_hidden = "#17191a",
+      fg_current = "#cccccc",
+      fg_visible = "#777777",
+      fg_modified = "#ffd67c",
+      bg_current = "#515151",
+      bg_visible = "#393939",
+      bg_hidden = "#262626",
     }
     set_hl(0, "MiniTablineCurrent", {
       fg = MiniTablineColors.fg_current,

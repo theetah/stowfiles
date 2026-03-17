@@ -20,7 +20,7 @@ add_newline = false
 # (fg:overlay_bg2)\
 # """
 
-palette = "tomorrow_night"
+palette = "decaf"
 
 [palettes.tomorrow_night]
 prompt_fg = '#eeeeee'
@@ -90,6 +90,23 @@ bright_yellow = '#e0b460'
 bright_green = '#98BB6C'
 bright_blue = '#7FB4CA'
 pale_purple = '#938AA9'
+
+[palettes.decaf]
+prompt_fg = '#eeeeee'
+text_fg = '#cccccc' # fg for more important elements, too dim to use on prompt itself
+background = '#2d2d2d'
+# OVERLAYS (background color of elements that are slightly lighter than terminal bg)
+overlay_bg1 = '#282828'
+overlay_bg2 = '#2a2a2a'
+overlay_fg1 = '#777777'
+overlay_fg2 = '#515151'
+# generic colors
+red = '#ff7f7b' # generally used for errors
+orange = '#ffbf70'
+yellow = '#ffd67c'
+green = '#beda78'
+blue = '#90bee1'
+purple = '#efb3f7'
 
 ### LEFT PROMPT
 
