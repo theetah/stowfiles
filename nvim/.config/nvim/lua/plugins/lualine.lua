@@ -5,7 +5,6 @@ return {
     local lualine = require("lualine")
     local submode = require("submode")
 
-    local navic = { "navic", color_correction = "static", navic_opts = { highlight = true } }
     -- local left_separator = ""
     -- local right_separator = ""
     local left_separator = ""
@@ -20,11 +19,13 @@ return {
       end
     end
 
-    local debug_status = {
+    local debug_indicator = {
       function()
-        return "󰃤"
+        return "DEBUGGING"
       end,
-      color = { fg = "#ff5d62" },
+      -- INCREDIBLY hacky way to set a highlight group color to hexadecimal format, as it normally returns in decimal.
+      -- what the hell? why does it return decimal?!
+      color = { fg = string.format("#%06x", vim.api.nvim_get_hl(0, { name = "DiagnosticError" }).fg) },
       cond = function()
         return get_submode() == "DEBUG"
       end,
@@ -36,7 +37,7 @@ return {
       options = {
         component_separators = "",
         section_separators = { left = left_separator, right = right_separator },
-        -- disabled_filetypes = { "neo-tree", "trouble", "aerial", },
+        disabled_filetypes = { "neo-tree", "trouble", "aerial" },
       },
       sections = {
 
@@ -53,19 +54,17 @@ return {
         },
 
         lualine_b = {
-          -- debug_status,
           "filename",
         },
         lualine_c = { "filetype", "encoding" },
 
         lualine_x = {
-          navic,
+          debug_indicator,
         },
 
         lualine_y = {
           "diagnostics",
           "lsp_status",
-          -- lsp,
         },
 
         lualine_z = {
@@ -90,7 +89,8 @@ return {
     vim.api.nvim_create_autocmd("User", {
       group = vim.api.nvim_create_augroup("user-event", {}),
       pattern = { "SubmodeEnterPre", "SubmodeEnterPost", "SubmodeLeavePre", "SubmodeLeavePost" },
-      callback = function(env)
+      -- unused arg is `event`.
+      callback = function(_)
         lualine.refresh({ place = { "statusline" } })
       end,
     })

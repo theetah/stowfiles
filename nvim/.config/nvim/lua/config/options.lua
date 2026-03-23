@@ -1,5 +1,6 @@
 local options = {
   opt = {
+    -- numbers are listed relative to cursor position.
     relativenumber = true,
     number = true,
     -- Enable mouse mode, can be useful for resizing splits for example!
@@ -29,8 +30,8 @@ local options = {
   },
 
   bo = {
-    tabstop = 2,
-    shiftwidth = 2,
+    tabstop = 4,
+    shiftwidth = 4,
     expandtab = true,
   },
 

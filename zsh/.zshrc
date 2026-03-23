@@ -46,6 +46,7 @@ alias_if_exists () {
 # Note: below won't work on Ubuntu-based systems, due to package naming.
 alias_if_exists "cat" "bat"
 alias_if_exists "fp" "flatpak"
+alias_if_exists "py" "python3"
 
 # You do not want to implement array logic in
 # the alias_if_exists function. Trust me.

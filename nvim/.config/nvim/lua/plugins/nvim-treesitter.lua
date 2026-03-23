@@ -2,6 +2,7 @@ return { -- Highlight, edit, and navigate code
   priority = 1000,
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
+  -- Depending on the OS, this might be ...configs OR ...config
   main = "nvim-treesitter.config", -- Sets main module to use for opts
   -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
   opts = {
