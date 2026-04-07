@@ -1,7 +1,9 @@
 #!/bin/bash
 
+# NOTE: this file is quite dated. not sure if i want to work on it anymore, as it's quite finnicky
 # is bash the best language for this? probably not. too bad!
 
+# TODO: very likely a way to fix below behavior being required, stow flags?
 if [ ! -d ~/stowfiles ]; then
   echo "repo was cloned incorrectly; parent this repo to home directory."
   exit 1
