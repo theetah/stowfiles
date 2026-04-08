@@ -1,0 +1,54 @@
+# -*- conf -*-
+# Base16 Decaf
+
+[colors-dark]
+cursor=14161b e0e2ea # NvimDarkGrey2 NvimLightGrey2
+foreground=cccccc # NvimLightGrey2
+background=2d2d2d # NvimDarkGrey2
+
+selection-foreground=2d2d2d # NvimLightGrey2
+selection-background=ffe7b3 # NvimDarkGrey4
+
+regular0=515151 # NvimDarkGrey1
+regular1=ff7f7b # NvimLightRed
+regular2=beda78 # NvimLightGreen
+regular3=ffd67c # NvimLightYellow
+regular4=90bee1 # NvimLightBlue
+regular5=ff93b3 # NvimLightMagenta
+regular6=bed6ff # NvimLightCyan
+regular7=393939 # NvimLightGrey3
+
+bright0=777777 # NvimDarkGrey3
+bright1=ff7f7b # NvimLightRed
+bright2=beda78 # NvimLightGreen
+bright3=ffd67c # NvimLightYellow
+bright4=90bee1 # NvimLightBlue
+bright5=ff93b3 # NvimLightMagenta
+bright6=bed6ff # NvimLightCyan
+bright7=b4b7b4 # NvimLightGrey1
+
+[colors-light]
+cursor=e0e2ea 14161b # NvimLightGrey2 NvimDarkGrey2
+foreground=14161b # NvimDarkGrey2
+background=e0e2ea # NvimLightGrey2
+
+selection-foreground=14161b # NvimDarkGrey2
+selection-background=9b9ea4 # NvimLightGrey4
+
+regular0=eef1f8 # NvimLightGrey1
+regular1=590008 # NvimDarkRed
+regular2=005523 # NvimDarkGreen
+regular3=6b5300 # NvimDarkYellow
+regular4=004c73 # NvimDarkBlue
+regular5=470045 # NvimDarkMagenta
+regular6=007373 # NvimDarkCyan
+regular7=2c2e33 # NvimDarkGrey3
+
+bright0=c4c6cd # NvimLightGrey3
+bright1=590008 # NvimDarkRed
+bright2=005523 # NvimDarkGreen
+bright3=6b5300 # NvimDarkYellow
+bright4=004c73 # NvimDarkBlue
+bright5=470045 # NvimDarkMagenta
+bright6=007373 # NvimDarkCyan
+bright7=07080d # NvimDarkGrey1
