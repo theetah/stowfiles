@@ -4,7 +4,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd extendedglob nomatch notify
 unsetopt beep
-# bindkey -v
+bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/hache/.zshrc'
@@ -90,12 +90,15 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 
-#####################
-### PLUGIN TWEAKS ###
-#####################
+##############
+### TWEAKS ###
+##############
 
 # small tweak to zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=245'
+
+# ensure ls-deluxe gets correct colors
+eval "$(dircolors)"
 
 ################
 ### STARSHIP ###
@@ -105,3 +108,22 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=245'
 # export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml:-$HOME/.config/starship/zsh.toml"
 export STARSHIP_CONFIG="$HOME/.config/starship/zsh.toml"
 eval "$(starship init zsh)"
+
+####################
+### TMUX SESSION ###
+####################
+
+# This snippet allows the shell to be attached to the session,
+# effectively, Ctrl+D will close the window like normal, but we now have sessions!
+if command -v tmux &>/dev/null; then
+    if [ -z "$TMUX" ]; then  # Not already inside tmux
+        session_name="main"
+        
+        # Attach if session exists; otherwise, create new session
+        if tmux has-session -t "$session_name" 2>/dev/null; then
+            exec tmux attach-session -t "$session_name"
+        else
+            exec tmux new-session -s "$session_name"
+        fi
+    fi
+fi
