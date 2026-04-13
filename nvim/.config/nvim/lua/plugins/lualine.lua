@@ -3,6 +3,7 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons", "pogyomo/submode.nvim", "SmiteshP/nvim-navic" },
   config = function()
     local lualine = require("lualine")
+    local overseer = require("overseer")
     local submode = require("submode")
 
     -- local left_separator = ""
@@ -60,6 +61,20 @@ return {
 
         lualine_x = {
           debug_indicator,
+          {
+            "overseer",
+            label = "", -- Prefix for task counts
+            colored = true, -- Color the task icons and counts
+            symbols = {
+              [overseer.STATUS.FAILURE] = "FAILURE:",
+              [overseer.STATUS.CANCELED] = "CANCELED:",
+              [overseer.STATUS.SUCCESS] = "SUCCESS:",
+              [overseer.STATUS.RUNNING] = "RUNNING:",
+            },
+            unique = false, -- Unique-ify non-running task count by name
+            status = nil, -- List of task statuses to display
+            filter = nil, -- Function to filter out tasks you don't wish to display
+          },
         },
 
         lualine_y = {
