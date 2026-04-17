@@ -32,15 +32,15 @@ eval "$(starship init bash)"
 
 # This snippet allows the shell to be attached to the session,
 # effectively, Ctrl+D will close the window like normal, but we now have sessions!
-if command -v tmux &>/dev/null; then
-    if [ -z "$TMUX" ]; then  # Not already inside tmux
-        session_name="main"
-        
-        # Attach if session exists; otherwise, create new session
-        if tmux has-session -t "$session_name" 2>/dev/null; then
-            exec tmux attach-session -t "$session_name"
-        else
-            exec tmux new-session -s "$session_name"
-        fi
-    fi
-fi
+
+# if command -v tmux &>/dev/null; then
+#     if [ -z "$TMUX" ]; then  # Not already inside tmux
+#         session_name="default"
+#         # Attach if session exists; otherwise, create new session
+#         if tmux has-session -t "$session_name" 2>/dev/null; then
+#             exec tmux attach-session -t "$session_name"
+#         else
+#             exec tmux new-session -s "$session_name"
+#         fi
+#     fi
+# fi
