@@ -72,6 +72,7 @@ fi
 # Keybinds
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+# key setup for caveman-brained terminal workflow using tmux
 
 # Miscellaneous
 autoload -U select-word-style
@@ -93,6 +94,7 @@ eval "$(dircolors)"
 
 # uncomment when starship supports multiple config files
 # export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml:-$HOME/.config/starship/zsh.toml"
+# NOTE: do I put this at the very end, or before TMUX?
 export STARSHIP_CONFIG="$HOME/.config/starship/zsh.toml"
 eval "$(starship init zsh)"
 
@@ -100,17 +102,28 @@ eval "$(starship init zsh)"
 ### TMUX SESSION ###
 ####################
 
-# This snippet allows the shell to be attached to the session,
-# effectively, Ctrl+D will close the window like normal, but we now have sessions!
+# unfortunately, no consistent (and well-documented) way to check if prompt is empty, so this will have to do.
+detach_on_eof() {
+  tmux detach
+}
+zle -N detach_on_eof
 
-# if command -v tmux &>/dev/null; then
-#     if [ -z "$TMUX" ]; then  # Not already inside tmux
-#         session_name="default"
-#         # Attach if session exists; otherwise, create new session
-#         if tmux has-session -t "$session_name" 2>/dev/null; then
-#             exec tmux attach-session -t "$session_name"
-#         else
-#             exec tmux new-session -s "$session_name"
-#         fi
-#     fi
-# fi
+# the fact that wc works perfectly for this irks me quite a lot.
+num_open_panes=$(tmux list-panes | wc -l)
+num_open_windows=$(tmux list-windows | wc -l)
+if [[ $num_open_panes == 1 && $num_open_windows == 1 && -z "$TOGGLETERM" ]];
+then
+  # we have only one window with one pane (and, we are not in nvim-toggleterm). upon Ctrl+D, preserve session.
+  setopt ignoreeof
+  bindkey "^D" detach_on_eof
+fi
+# else, business as usual.
+
+session_name="default"
+if [ -z "$TMUX" ]; then
+  if tmux has-session -t "$session_name" 2>/dev/null; then
+    exec tmux attach-session -t "$session_name"
+  else
+    exec tmux new-session -s "$session_name"
+  fi
+fi
