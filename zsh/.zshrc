@@ -102,21 +102,22 @@ eval "$(starship init zsh)"
 ### TMUX SESSION ###
 ####################
 
-# unfortunately, no consistent (and well-documented) way to check if prompt is empty, so this will have to do.
+setopt ignoreeof
 detach_on_eof() {
-  tmux detach
+  num_open_panes=$(tmux list-panes | wc -l)
+  num_open_windows=$(tmux list-windows | wc -l)
+  if [[ $num_open_panes == 1 && $num_open_windows == 1 && -z "$TOGGLETERM" ]];
+  then
+    # we have only one window with one pane (and, we are not in nvim-toggleterm). upon Ctrl+D, preserve session.
+    tmux detach
+  else
+    exit
+  fi
 }
 zle -N detach_on_eof
+bindkey "^D" detach_on_eof
 
 # the fact that wc works perfectly for this irks me quite a lot.
-num_open_panes=$(tmux list-panes | wc -l)
-num_open_windows=$(tmux list-windows | wc -l)
-if [[ $num_open_panes == 1 && $num_open_windows == 1 && -z "$TOGGLETERM" ]];
-then
-  # we have only one window with one pane (and, we are not in nvim-toggleterm). upon Ctrl+D, preserve session.
-  setopt ignoreeof
-  bindkey "^D" detach_on_eof
-fi
 # else, business as usual.
 
 session_name="default"
