@@ -62,9 +62,11 @@ alias py="python3"
 
 # Conditional Aliases
 
-if command -v lsd >/dev/null 2>&1; then
-  alias ls="lsd"
-  alias la="lsd -A"
+if command -v eza >/dev/null 2>&1; then
+  alias ls="eza --icons"
+  alias ll="eza --icons -l"
+  alias la="eza --icons -A"
+  alias lla="eza --icons -lA"
 fi
 
 if command -v bat >/dev/null 2>&1; then
