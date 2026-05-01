@@ -1,0 +1,12 @@
+colorful: true
+
+filekinds:
+  directory: {foreground: Red}
+
+extensions:
+  "steampath":
+    icon:
+      glyph: 
+  "steampid":
+    icon:
+      glyph: 
