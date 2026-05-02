@@ -36,6 +36,7 @@ red = '#ff7f7b' # generally used for errors
 orange = '#ffbf70'
 yellow = '#ffd67c'
 green = '#beda78'
+cyan = '#bed6ff'
 blue = '#90bee1'
 purple = '#efb3f7'
 magenta = '#ff93b3'

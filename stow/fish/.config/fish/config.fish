@@ -8,9 +8,9 @@ end
 
 alias fp "flatpak"
 alias py "python3"
-alias ls "lsd"
-alias la "lsd -A"
-alias lsa "lsd -lA"
+alias ls "eza"
+alias la "eza -A"
+alias lsa "eza -lA"
 alias cat "bat"
 alias mint "env -u WAYLAND_DISPLAY /usr/bin/"
 
