@@ -130,7 +130,7 @@ purple = '#efb3f7'
 symbol = 's'
 style = 'fg:yellow'
 format = '[\[$symbol\] ]($style)'
-disabled = false
+disabled = true
 
 # NOTE: currently unused
 [os]
@@ -140,6 +140,7 @@ disabled = false
 
 [os.symbols]
 Fedora = ''
+Void = ''
 
 [directory]
 style = 'fg:green'
@@ -171,10 +172,12 @@ format = '[ $symbol$branch]($style)'
 # style = 'bg:background'
 modified = '[󰇂 ](fg:yellow)'
 deleted = '[󰍴](fg:red)'
-stashed = '[󱓾 ](fg:orange)'
-untracked = '[󰝒 ](fg:green)'
-renamed = '[󰜢 ](fg:orange)'
-format = '( \[$all_status\])'
+stashed = '[󰏗 ](fg:orange)'
+untracked = '[?](fg:green)'
+renamed = '[󰑕](fg:orange)'
+staged = '[](fg:blue)'
+# no space, attach it to the `git_branch` module
+format = '(\[$all_status\])'
 
 [fill]
 symbol = '▁'
