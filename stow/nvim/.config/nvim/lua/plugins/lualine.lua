@@ -1,11 +1,10 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons", "pogyomo/submode.nvim", "SmiteshP/nvim-navic" },
+  dependencies = { "nvim-tree/nvim-web-devicons", "pogyomo/submode.nvim" },
   config = function()
     local lualine = require("lualine")
     local overseer = require("overseer")
     local submode = require("submode")
-    local navic = require("nvim-navic")
 
     -- local left_separator = ""
     -- local right_separator = ""
@@ -59,8 +58,8 @@ return {
           "filename",
           "filetype",
         },
-        -- FIXME: doesn't work; consult git history for working version
-        lualine_c = { "navic" },
+
+        lualine_c = {},
 
         lualine_x = {
           debug_indicator,

@@ -61,10 +61,11 @@ vim.diagnostic.config({
   -- virtual_lines = true,
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN] = "",
-      [vim.diagnostic.severity.INFO] = "󰋽",
-      [vim.diagnostic.severity.HINT] = "󰌶",
+      -- severity code labeled on end of line
+      [vim.diagnostic.severity.ERROR] = "", -- 1
+      [vim.diagnostic.severity.WARN] = "", -- 2
+      [vim.diagnostic.severity.INFO] = "󰋽", -- 3
+      [vim.diagnostic.severity.HINT] = "󰌶", -- 4
     },
     numhl = {
       [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
