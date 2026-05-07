@@ -11,7 +11,7 @@ return {
     highlight_on_jump = 0,
   },
   init = function()
-    -- vim.keymap.set("n", "<tab>", "<cmd>AerialToggle<CR>")
+    vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle<CR>")
     -- optionally, use "AerialToggle!" for same effect, but cursor stays in current window
   end,
 }

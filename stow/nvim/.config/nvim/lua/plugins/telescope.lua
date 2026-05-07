@@ -88,6 +88,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
     vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
     -- vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+    vim.keymap.set("n", "<leader><leader>", function()
+      builtin.buffers(require("telescope.themes").get_dropdown({
+        -- These are options common to all pickers:
+        winblend = 0,
+        previewer = false,
+        path_display = { "smart", "filename_first" },
+        -- Options unique to telescope.builtin.buffers:
+        select_current = true,
+      }))
+    end, { desc = "[ ] Find existing buffers" })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set("n", "<leader>/", function()
