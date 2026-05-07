@@ -31,7 +31,6 @@ return {
           mid = { size = "20%" },
           right = { size = "60%", preview = "always" },
         },
-        border = "none",
       },
       node_markers = {
         icons = {
@@ -61,7 +60,7 @@ return {
       -- },
     }
     -- TODO: make this context-aware (i.e., close menu if pressing tab in Navbuddy menu)
-    vim.keymap.set("n", "<tab>", function()
+    vim.keymap.set("n", "<leader><tab>", function()
       -- not a particularly efficient way, executing this on every invokation. Too bad!
       local cmds = vim.api.nvim_buf_get_commands(0, { builtin = false })
       if cmds["Navbuddy"] then
