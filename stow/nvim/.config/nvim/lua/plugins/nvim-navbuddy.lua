@@ -66,7 +66,7 @@ return {
       if cmds["Navbuddy"] then
         vim.api.nvim_cmd({ cmd = "Navbuddy" }, {})
       else
-        print("LSP not attached, or Navbuddy not registered to this buffer")
+        print("[Navbuddy]: No LSP is attached to this buffer, or otherwise could not launch")
       end
     end)
     -- vim.keymap.set("n", "<tab>", "<cmd>Navbuddy<CR>", { desc = "Open Navbuddy" })

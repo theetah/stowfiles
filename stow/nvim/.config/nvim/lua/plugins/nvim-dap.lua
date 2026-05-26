@@ -26,7 +26,7 @@ return {
           })
 
           vim.fn.sign_define("DapStopped", {
-            text = "󱕊",
+            text = "",
             texthl = "DiagnosticSignWarn",
             linehl = "Visual",
             numhl = "DiagnosticSignWarn",

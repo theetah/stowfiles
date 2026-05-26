@@ -19,6 +19,9 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+-- The existence of this bind is perhaps indicative of a structural problem of vim.
+vim.keymap.set("n", "<leader>y", "ggVGy`.zz", { desc = "Copy all of the current buffer" })
+
 -- Currently doesn't work, even after tinkering. Thanks tmux!
 -- Though, perhaps this is for the better.
 -- vim.keymap.set("i", "<C-BS>", "<C-w>", { desc = "Alias for Ctrl + w (delete previous word)." })
