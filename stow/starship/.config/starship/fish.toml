@@ -60,7 +60,7 @@ Fedora = ''
 Void = ''
 
 [directory]
-style = 'fg:green'
+style = 'fg:green bold'
 format = '[$path ]($style)'
 truncation_length = 3
 truncation_symbol = '…/'
