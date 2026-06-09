@@ -5,42 +5,42 @@
 #     man fish-interactive | less +/^SYNTAX.HIGHLIGHTING
 # for appropriate commands to add to ~/.config/fish/config.fish instead.
 
-set --global fish_color_autosuggestion b8b8b8
-set --global fish_color_cancel --reverse
-set --global fish_color_command a1b56c
-set --global fish_color_comment f7ca88
-set --global fish_color_cwd green
-set --global fish_color_cwd_root red
-set --global fish_color_end ba8baf
-set --global fish_color_error ab4642
-set --global fish_color_escape 86c1b9
-set --global fish_color_gray 
-set --global fish_color_history_current --bold
-set --global fish_color_host --reset
-set --global fish_color_host_remote yellow
-set --global fish_color_keyword 
+set --global fish_color_autosuggestion 777777
+set --global fish_color_cancel ff7f7b
+set --global fish_color_command beda78
+set --global fish_color_comment 777777
+set --global fish_color_cwd 90bee1
+set --global fish_color_cwd_root 
+set --global fish_color_end efb3f7
+set --global fish_color_error ff7f7b
+set --global fish_color_escape ff93b3
+set --global fish_color_gray 515151
+set --global fish_color_history_current 
+set --global fish_color_host beda78
+set --global fish_color_host_remote efb3f7
+set --global fish_color_keyword ff93b3
 set --global fish_color_match --background=brblue
-set --global fish_color_normal --reset
-set --global fish_color_operator 7cafc2
-set --global fish_color_option 
-set --global fish_color_param 383838
-set --global fish_color_quote f7ca88
-set --global fish_color_redirection 383838
-set --global fish_color_search_match white --bold --background=brblack
-set --global fish_color_selection white --bold --background=brblack
-set --global fish_color_status red
-set --global fish_color_user brgreen
-set --global fish_color_valid_path --underline=single
+set --global fish_color_normal cccccc
+set --global fish_color_operator ff93b3
+set --global fish_color_option ffbf70
+set --global fish_color_param cccccc
+set --global fish_color_quote ffd67c
+set --global fish_color_redirection 66cccc
+set --global fish_color_search_match --background=393939
+set --global fish_color_selection --background=393939
+set --global fish_color_status ff7f7b
+set --global fish_color_user beda78
+set --global fish_color_valid_path 
 set --global fish_pager_color_background 
-set --global fish_pager_color_completion --reset
-set --global fish_pager_color_description B3A06D
-set --global fish_pager_color_prefix --bold --underline=single
-set --global fish_pager_color_progress brwhite --bold --background=cyan
+set --global fish_pager_color_completion bed6ff
+set --global fish_pager_color_description b4b7b4
+set --global fish_pager_color_prefix ff93b3
+set --global fish_pager_color_progress b4b7b4
 set --global fish_pager_color_secondary_background 
 set --global fish_pager_color_secondary_completion 
 set --global fish_pager_color_secondary_description 
 set --global fish_pager_color_secondary_prefix 
-set --global fish_pager_color_selected_background --background=brblack
+set --global fish_pager_color_selected_background 
 set --global fish_pager_color_selected_completion 
 set --global fish_pager_color_selected_description 
 set --global fish_pager_color_selected_prefix 

@@ -1,0 +1,29 @@
+# name: 'Base16 Decaf'
+# preferred_background: 2d2d2d
+
+fish_color_normal cccccc
+fish_color_command beda78
+fish_color_param cccccc
+fish_color_keyword ff93b3
+fish_color_quote ffd67c
+fish_color_redirection 66cccc
+fish_color_end efb3f7
+fish_color_comment 777777
+fish_color_error ff7f7b
+fish_color_gray 515151
+fish_color_selection --background=393939
+fish_color_search_match --background=393939
+fish_color_option ffbf70
+fish_color_operator ff93b3
+fish_color_escape ff93b3
+fish_color_autosuggestion 777777
+fish_color_cancel ff7f7b
+fish_color_cwd 90bee1
+fish_color_user beda78
+fish_color_host beda78
+fish_color_host_remote efb3f7
+fish_color_status ff7f7b
+fish_pager_color_progress b4b7b4
+fish_pager_color_prefix ff93b3
+fish_pager_color_completion bed6ff
+fish_pager_color_description b4b7b4
