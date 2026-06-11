@@ -83,6 +83,10 @@ if status is-interactive
         alias py "python3"
     end
 
+    if command -q xbps-remove
+        alias xrr "xbps-remove -R"
+    end
+
     set fish_greeting ''
 
     starship init fish | source
