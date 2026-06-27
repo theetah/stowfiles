@@ -1,11 +1,12 @@
--- Must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-vim.g.have_nerd_font = true
+-- Must happen before plugins are loaded (otherwise some options related to leader key will be broken)
+local utils = require("utils")
+---@diagnostic disable-next-line: undefined-field
+utils.require_dir_from_config("lua/core")
 
-require("config.options")
-require("config.keymaps")
-require("config.autocommands")
+-- ELITE ball ahh tech (this changes the "Press ENTER or type command to continue" garbage)
+-- On a more serious note, this gives Command mode highlighting, and puts startup errors into
+-- a buffer that can be accessed with `<g`.
+require("vim._core.ui2").enable()
 
 -- Bootstrap lazy.nvim
 -- See :help lazy.nvim.txt for more info
@@ -20,42 +21,7 @@ end
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
--- [[ Configure and install plugins ]]
---
---  To check the current status of your plugins, run
---    :Lazy
---
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins you can run
---    :Lazy update
---
--- NOTE: Here is where you install your plugins.
 require("lazy").setup({
-  -- DO THIS AFTER ALL PLUGINS HAVE BEEN ORGANIZED
   spec = { { import = "plugins" } },
   change_detection = { enabled = false, notify = false },
-}, {
-  ui = {
-    -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = "⌘",
-      config = "🛠",
-      event = "📅",
-      ft = "📂",
-      init = "⚙",
-      keys = "🗝",
-      plugin = "🔌",
-      runtime = "💻",
-      require = "🌙",
-      source = "📄",
-      start = "🚀",
-      task = "📌",
-      lazy = "💤 ",
-    },
-  },
 })
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et

@@ -2,7 +2,6 @@ return {
   "pogyomo/submode.nvim",
   dependencies = {
     "mfussenegger/nvim-dap",
-    "folke/which-key.nvim",
     "nvim-neotest/nvim-nio",
     "rcarriga/nvim-dap-ui",
     "theHamsta/nvim-dap-virtual-text",
@@ -16,15 +15,13 @@ return {
     ---- DAP & DAP UI ----
     ----------------------
     local dap = require("dap")
-    local wk = require("which-key")
     local dapui = require("dapui")
     local dapvt = require("nvim-dap-virtual-text.virtual_text")
     submode.create("Debug", {
       mode = "n",
-      enter = "<leader>d",
-      leave = { "<ESC>", "<leader>d" },
+      enter = "<M-d>",
+      leave = { "<ESC>", "<M-d>" },
     })
-    wk.add({ "<leader>d", desc = "Debug submode" })
     submode.set("Debug", "b", dap.toggle_breakpoint, { desc = "Toggle a breakpoint" })
     submode.set("Debug", "c", dap.continue, { desc = "Start/Continue the debugging process" })
     submode.set("Debug", "B", dap.clear_breakpoints, { desc = "Clear all breakpoints" })
@@ -50,5 +47,18 @@ return {
     submode.set("Debug", "<Up>", dap.step_out, { desc = "Debug: step out" })
     submode.set("Debug", "<Down>", dap.step_into, { desc = "Debug: step into" })
     ----------------------
+  end,
+  config = function()
+    -- Allow submode events to update the statusline
+    vim.api.nvim_create_autocmd("User", {
+      group = vim.api.nvim_create_augroup("user-event", {}),
+      pattern = { "SubmodeEnterPre", "SubmodeEnterPost", "SubmodeLeavePre", "SubmodeLeavePost" },
+      -- unused arg is `event`.
+      callback = function(_)
+        vim.cmd("redrawstatus")
+        -- Use below line instead of the above one for lualine.
+        -- lualine.refresh({ place = { "statusline" } })
+      end,
+    })
   end,
 }

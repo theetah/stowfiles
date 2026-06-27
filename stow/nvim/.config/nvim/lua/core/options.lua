@@ -38,6 +38,11 @@ local options = {
   wo = {
     wrap = false,
   },
+
+  g = {
+    mapleader = " ",
+    maplocalleader = " ",
+  },
 }
 
 for name, tab in pairs(options) do
@@ -62,10 +67,10 @@ vim.diagnostic.config({
   signs = {
     text = {
       -- severity code labeled on end of line
-      [vim.diagnostic.severity.ERROR] = "", -- 1
-      [vim.diagnostic.severity.WARN] = "", -- 2
-      [vim.diagnostic.severity.INFO] = "󰋽", -- 3
-      [vim.diagnostic.severity.HINT] = "󰌶", -- 4
+      -- [vim.diagnostic.severity.ERROR] = "", -- 1
+      -- [vim.diagnostic.severity.WARN] = "", -- 2
+      -- [vim.diagnostic.severity.INFO] = "󰋽", -- 3
+      -- [vim.diagnostic.severity.HINT] = "󰌶", -- 4
     },
     numhl = {
       [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
