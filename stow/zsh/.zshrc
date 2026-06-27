@@ -46,10 +46,10 @@ zinit light zsh-users/zsh-autosuggestions
 
 # Exports
 export PATH=$PATH:$HOME/.local/bin
-export BAT_THEME="Tomorrow-Night"
-export EDITOR="/usr/bin/nvim"
-export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+export EDITOR=/usr/bin/nvim
+export DOTNET_ROOT=$HOME/.dotnet
+export BAT_THEME="Tomorrow-Night"
 
 # Aliases
 # WARN: Below alias will ensure any other aliases are expanded with sudo. Security risk.
@@ -63,10 +63,10 @@ alias py="python3"
 # Conditional Aliases
 
 if command -v eza >/dev/null 2>&1; then
-  alias ls="eza --icons"
-  alias ll="eza --icons -l"
-  alias la="eza --icons -A"
-  alias lla="eza --icons -lA"
+  alias ls="eza --icons --group-directories-first"
+  alias ll="eza --icons -l --group-directories-first"
+  alias la="eza --icons -A --group-directories-first"
+  alias lla="eza --icons -lA --group-directories-first"
 fi
 
 if command -v bat >/dev/null 2>&1; then
