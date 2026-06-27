@@ -87,12 +87,12 @@ format = '[ $symbol$branch]($style)'
 
 [git_status]
 # style = 'bg:background'
-modified = '[󰇂 ](fg:yellow)'
+modified = '[󰇂](fg:yellow)'
 deleted = '[󰍴](fg:red)'
-stashed = '[󰏗 ](fg:orange)'
+stashed = '[󰏗](fg:orange)'
 untracked = '[?](fg:green)'
 renamed = '[󰑕](fg:orange)'
-staged = '[](fg:blue)'
+staged = '[󰢪](fg:green)'
 # no space, attach it to the `git_branch` module
 format = '(\[$all_status\])'
 
