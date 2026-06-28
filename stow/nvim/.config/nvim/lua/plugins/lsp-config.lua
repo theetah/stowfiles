@@ -102,9 +102,9 @@ return {
       end,
     })
 
-    -- Only reason this line exists is because it is used further down below
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+    vim.lsp.config["*"] = {
+      capabilities = require("blink.cmp").get_lsp_capabilities(),
+    }
 
     local native_servers = {
       jdtls = {},
@@ -162,6 +162,7 @@ return {
     }
 
     local servers = vim.tbl_deep_extend("force", native_servers, mason_servers)
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
 
     -- Ensure the servers and tools above are installed
     --  To check the current status of installed tools and/or manually install
