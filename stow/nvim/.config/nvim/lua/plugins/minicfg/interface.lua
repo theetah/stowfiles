@@ -26,6 +26,34 @@ local statusline = require("mini.statusline")
 statusline.setup({
   content = {
     active = function()
+      local function section_overseer(args)
+        if MiniStatusline.is_truncated(args.trunc_width) then
+          return "", nil
+        end
+        local overseer = require("overseer")
+        local tasks = overseer.list_tasks({
+          status = {
+            overseer.STATUS.PENDING,
+            overseer.STATUS.RUNNING,
+            overseer.STATUS.SUCCESS,
+            overseer.STATUS.FAILURE,
+            overseer.STATUS.CANCELED,
+          },
+          sort = require("overseer.task_list").sort_finished_recently,
+        })
+
+        local recent_task = tasks[1]
+        if recent_task then
+          if MiniStatusline.is_truncated(args.trunc_width) then
+            return recent_task.status, "Overseer" .. recent_task.status
+          else
+            return string.format("%s: %s", recent_task.name, recent_task.status), "Overseer" .. recent_task.status
+          end
+        else
+          return nil, nil
+        end
+      end
+
       -- Default config. Same with just nil.
       local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
       -- Allow submode to replace current mode if active
@@ -38,6 +66,7 @@ statusline.setup({
       local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
       local location = MiniStatusline.section_location({ trunc_width = 75 })
       local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
+      local overseer, overseer_hl = section_overseer({ trunc_width = 140 })
 
       return MiniStatusline.combine_groups({
         { hl = mode_hl, strings = { mode } },
@@ -45,6 +74,7 @@ statusline.setup({
         "%<", -- Mark general truncate point
         { hl = "MiniStatuslineFilename", strings = { filename } },
         "%=", -- End left alignment
+        { hl = overseer_hl, strings = { overseer } },
         { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
         { hl = mode_hl, strings = { search, location } },
       })

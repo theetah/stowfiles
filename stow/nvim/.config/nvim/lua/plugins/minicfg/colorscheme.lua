@@ -37,10 +37,18 @@ set_hl(0, "MiniTablineCurrent", {
   fg = MiniTablineColors.fg_current,
   bg = MiniTablineColors.bg_current,
 })
-set_hl(0, "MiniTablineHidden", { fg = MiniTablineColors.fg_visible, bg = MiniTablineColors.bg_hidden, italic = true })
+set_hl(0, "MiniTablineHidden", { fg = MiniTablineColors.fg_visible, bg = MiniTablineColors.bg_hidden })
 set_hl(0, "MiniTablineVisible", { fg = MiniTablineColors.fg_visible, bg = MiniTablineColors.bg_visible })
-set_hl(0, "MiniTablineModifiedCurrent", { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_current })
-set_hl(0, "MiniTablineModifiedVisible", { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_visible })
+set_hl(
+  0,
+  "MiniTablineModifiedCurrent",
+  { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_current, italic = true }
+)
+set_hl(
+  0,
+  "MiniTablineModifiedVisible",
+  { fg = MiniTablineColors.fg_modified, bg = MiniTablineColors.bg_visible, italic = true }
+)
 set_hl(
   0,
   "MiniTablineModifiedHidden",

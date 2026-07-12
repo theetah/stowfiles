@@ -27,12 +27,18 @@ local options = {
     cursorline = true,
     -- Minimal number of screen lines to keep above and below the cursor.
     scrolloff = 4,
+    -- Duplicate these here since they might not apply otherwise
+    tabstop = 4,
+    shiftwidth = 4,
+    softtabstop = 4,
+    expandtab = false,
   },
 
   bo = {
     tabstop = 4,
     shiftwidth = 4,
-    expandtab = true,
+    softtabstop = 4,
+    expandtab = false,
   },
 
   wo = {
