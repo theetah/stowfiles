@@ -58,6 +58,7 @@ set_hl(
 ----------------------------
 -- mini.statusline colors --
 ----------------------------
+-- more fine-grained control for components' colors are stored in the statusline's config file.
 local MiniStatuslineColors = {
   fg_mode = "#2d2d2d",
   mode_bg_colors = {
