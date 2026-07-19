@@ -21,6 +21,7 @@ require("mini.base16").setup({
 })
 
 local set_hl = vim.api.nvim_set_hl
+local get_hl = vim.api.nvim_get_hl
 
 -------------------------
 -- mini.tabline colors --
@@ -75,11 +76,18 @@ for mode, color in pairs(MiniStatuslineColors.mode_bg_colors) do
   set_hl(0, "MiniStatuslineMode" .. mode, { fg = MiniStatuslineColors.fg_mode, bg = color })
 end
 
-----------------------------
+-----------------------------
 -- mini.indentscope colors --
-----------------------------
+-----------------------------
 -- local MiniIndentscopeColors = {
 -- 	fg = "#777777"
 -- }
 -- set_hl(0, "MiniIndentscopeSymbol", { fg = MiniIndentscopeColors.fg })
 -- set_hl(0, "MiniIndentscopeSymbolOff", { fg = MiniIndentscopeColors.fg })
+
+-----------------------------
+-- indent-blankline colors --
+-----------------------------
+
+set_hl(0, "CustomIndentBlanklineIndent", { fg = "#777777", bg = "NONE" })
+set_hl(0, "CustomIndentBlanklineScope", { fg = "#b4b7b4", bg = "NONE" })
