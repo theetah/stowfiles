@@ -65,10 +65,10 @@ if status is-interactive
     alias doas "doas "
 
     if command -q eza
-        alias ls "eza --icons"
-        alias ll "eza --icons -l"
-        alias la "eza --icons -A"
-        alias lla "eza --icons -lA"
+        alias ls "eza --icons auto"
+        alias ll "eza --icons auto -l"
+        alias la "eza --icons auto -A"
+        alias lla "eza --icons auto -lA"
     end
 
     if command -q bat
