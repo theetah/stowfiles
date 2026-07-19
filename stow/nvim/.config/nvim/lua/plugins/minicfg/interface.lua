@@ -54,12 +54,17 @@ map("n", "<leader>fc", '<CMD>Pick files cwd="' .. config_directory .. '"<CR>', {
 
 -- File explorer like oil.nvim
 require("mini.files").setup()
+map("n", "<leader>e", "<CMD>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>", { desc = "Config files picker" })
 
 -- mini.extra adds many useful pickers.
 require("mini.extra").setup()
 -- note, below mapping might be messy when used in tandem with lazydev.
 map("n", "<leader>ws", '<CMD>Pick lsp scope="workspace_symbol"<CR>', { desc = "Pick LSP workspace symbols" })
 map("n", "<leader>ds", '<CMD>Pick lsp scope="document_symbol"<CR>', { desc = "Pick LSP document symbols" })
-map("n", "<leader>e", "<CMD>Pick explorer<CR>", { desc = "Open an explorer" })
+-- map("n", "<leader>fe", "<CMD>Pick explorer<CR>", { desc = "Open an explorer" })
+map("n", "<leader>fe", function()
+  local current_buf_dir = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+  vim.cmd("Pick explorer cwd='" .. current_buf_dir .. "'")
+end, { desc = "Open an explorer" })
 -- mini.icons for picker icons
 require("mini.icons").setup()

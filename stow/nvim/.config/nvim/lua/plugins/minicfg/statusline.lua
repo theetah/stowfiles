@@ -77,9 +77,8 @@ statusline.setup({
         if MiniStatusline.is_truncated(args.trunc_width) then
           return ""
         end
-        local attached_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+        local client = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })[1]
         -- lazy dumb method, but I don't expect more than one client per buffer usually
-        local client = attached_clients[1]
         if client == nil then
           return ""
         end
