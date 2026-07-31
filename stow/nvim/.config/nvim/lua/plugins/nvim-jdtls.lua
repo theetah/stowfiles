@@ -1,4 +1,4 @@
 return {
-  priority = 1000,
-  "mfussenegger/nvim-jdtls",
+    priority = 1000,
+    "mfussenegger/nvim-jdtls",
 }

@@ -1,60 +1,60 @@
 local options = {
-  opt = {
-    -- numbers are listed relative to cursor position.
-    relativenumber = true,
-    number = true,
-    -- Enable mouse mode, can be useful for resizing splits for example!
-    mouse = "a",
-    -- Don't show the mode, since it's already in the status line
-    showmode = false,
-    breakindent = true,
-    -- Save undo history
-    undofile = true,
-    -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-    ignorecase = true,
-    smartcase = true,
-    -- Keep signcolumn on by default
-    signcolumn = "yes",
-    -- Decrease update time
-    updatetime = 250,
-    -- Decrease mapped sequence wait time
-    -- Displays which-key popup sooner
-    timeoutlen = 300,
-    -- Configure how new splits should be opened
-    splitright = true,
-    splitbelow = true,
-    -- Show which line your cursor is on
-    cursorline = true,
-    -- Minimal number of screen lines to keep above and below the cursor.
-    scrolloff = 4,
-    -- Duplicate these here since they might not apply otherwise
-    tabstop = 4,
-    shiftwidth = 4,
-    softtabstop = 4,
-    expandtab = false,
-  },
+    opt = {
+        -- numbers are listed relative to cursor position.
+        relativenumber = true,
+        number = true,
+        -- Enable mouse mode, can be useful for resizing splits for example!
+        mouse = "a",
+        -- Don't show the mode, since it's already in the status line
+        showmode = false,
+        breakindent = true,
+        -- Save undo history
+        undofile = true,
+        -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+        ignorecase = true,
+        smartcase = true,
+        -- Keep signcolumn on by default
+        signcolumn = "yes",
+        -- Decrease update time
+        updatetime = 250,
+        -- Decrease mapped sequence wait time
+        -- Displays which-key popup sooner
+        timeoutlen = 300,
+        -- Configure how new splits should be opened
+        splitright = true,
+        splitbelow = true,
+        -- Show which line your cursor is on
+        cursorline = true,
+        -- Minimal number of screen lines to keep above and below the cursor.
+        scrolloff = 4,
+        -- Duplicate these here since they might not apply otherwise
+        tabstop = 4,
+        shiftwidth = 4,
+        softtabstop = 4,
+        expandtab = false,
+    },
 
-  bo = {
-    tabstop = 4,
-    shiftwidth = 4,
-    softtabstop = 4,
-    expandtab = false,
-  },
+    bo = {
+        tabstop = 4,
+        shiftwidth = 4,
+        softtabstop = 4,
+        expandtab = false,
+    },
 
-  wo = {
-    wrap = false,
-  },
+    wo = {
+        wrap = false,
+    },
 
-  g = {
-    mapleader = " ",
-    maplocalleader = " ",
-  },
+    g = {
+        mapleader = " ",
+        maplocalleader = " ",
+    },
 }
 
 for name, tab in pairs(options) do
-  for k, v in pairs(tab) do
-    vim[name][k] = v
-  end
+    for k, v in pairs(tab) do
+        vim[name][k] = v
+    end
 end
 
 -- Sync clipboard between OS and Neovim.
@@ -62,30 +62,30 @@ end
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
-  vim.opt.clipboard = "unnamedplus"
+    vim.opt.clipboard = "unnamedplus"
 end)
 
 -- Change diagnostic symbols that appear in the gutter
 -- to be consistent with lualine.nvim
 vim.diagnostic.config({
-  -- virtual_text = true,
-  -- virtual_lines = true,
-  signs = {
-    text = {
-      -- severity code labeled on end of line
-      -- [vim.diagnostic.severity.ERROR] = "", -- 1
-      -- [vim.diagnostic.severity.WARN] = "", -- 2
-      -- [vim.diagnostic.severity.INFO] = "󰋽", -- 3
-      -- [vim.diagnostic.severity.HINT] = "󰌶", -- 4
+    -- virtual_text = true,
+    -- virtual_lines = true,
+    signs = {
+        text = {
+            -- severity code labeled on end of line
+            -- [vim.diagnostic.severity.ERROR] = "", -- 1
+            -- [vim.diagnostic.severity.WARN] = "", -- 2
+            -- [vim.diagnostic.severity.INFO] = "󰋽", -- 3
+            -- [vim.diagnostic.severity.HINT] = "󰌶", -- 4
+        },
+        numhl = {
+            [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+            [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+            [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+        },
     },
-    numhl = {
-      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-      [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-    },
-  },
-  float = { focusable = false },
+    float = { focusable = false },
 })
 
 -- ### User-defined Commands ###
@@ -96,10 +96,10 @@ vim.diagnostic.config({
 -- This command is present to easily override this behavior, as the value of
 -- tabstop is typically changed to be different than this config's during runtime.
 vim.api.nvim_create_user_command(
-  "EnfInd",
-  "set tabstop=" .. options.bo.tabstop, --.. " shiftwidth=" .. options.bo.shiftwidth,
-  {
-    nargs = 0,
-    desc = "Enforce indent. Good for pesky files that make vim-sleuth a bit finnicky.",
-  }
+    "EnfInd",
+    "set tabstop=" .. options.bo.tabstop, --.. " shiftwidth=" .. options.bo.shiftwidth,
+    {
+        nargs = 0,
+        desc = "Enforce indent. Good for pesky files that make vim-sleuth a bit finnicky.",
+    }
 )

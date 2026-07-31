@@ -2,27 +2,27 @@ local map = vim.keymap.set
 
 local MiniClue = require("mini.clue")
 MiniClue.setup({
-  triggers = {
-    { mode = "n", keys = "g" },
-    { mode = { "n", "x" }, keys = "<leader>" },
-    { mode = { "n", "x" }, keys = "'" },
-    { mode = { "n", "x" }, keys = "`" },
-    { mode = { "n", "x" }, keys = '"' },
-    { mode = { "i", "c" }, keys = "<C-r>" },
-    { mode = "n", keys = "<C-w>" },
-  },
-  clues = {
-    MiniClue.gen_clues.g(),
-    MiniClue.gen_clues.marks(),
-    MiniClue.gen_clues.windows(),
-    MiniClue.gen_clues.registers(),
-  },
-  window = {
-    delay = 500,
-    config = {
-      width = "auto",
+    triggers = {
+        { mode = "n", keys = "g" },
+        { mode = { "n", "x" }, keys = "<leader>" },
+        { mode = { "n", "x" }, keys = "'" },
+        { mode = { "n", "x" }, keys = "`" },
+        { mode = { "n", "x" }, keys = '"' },
+        { mode = { "i", "c" }, keys = "<C-r>" },
+        { mode = "n", keys = "<C-w>" },
     },
-  },
+    clues = {
+        MiniClue.gen_clues.g(),
+        MiniClue.gen_clues.marks(),
+        MiniClue.gen_clues.windows(),
+        MiniClue.gen_clues.registers(),
+    },
+    window = {
+        delay = 500,
+        config = {
+            width = "auto",
+        },
+    },
 })
 
 -- Command Line
@@ -41,9 +41,9 @@ MiniPick.setup()
 
 -- Allow files picker to change its cwd
 MiniPick.registry.files = function(local_opts)
-  local opts = { source = { cwd = local_opts.cwd } }
-  local_opts.cwd = nil
-  return MiniPick.builtin.files(local_opts, opts)
+    local opts = { source = { cwd = local_opts.cwd } }
+    local_opts.cwd = nil
+    return MiniPick.builtin.files(local_opts, opts)
 end
 
 local config_directory = vim.fn.stdpath("config")
@@ -63,8 +63,8 @@ map("n", "<leader>ws", '<CMD>Pick lsp scope="workspace_symbol"<CR>', { desc = "P
 map("n", "<leader>ds", '<CMD>Pick lsp scope="document_symbol"<CR>', { desc = "Pick LSP document symbols" })
 -- map("n", "<leader>fe", "<CMD>Pick explorer<CR>", { desc = "Open an explorer" })
 map("n", "<leader>fe", function()
-  local current_buf_dir = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
-  vim.cmd("Pick explorer cwd='" .. current_buf_dir .. "'")
+    local current_buf_dir = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+    vim.cmd("Pick explorer cwd='" .. current_buf_dir .. "'")
 end, { desc = "Open an explorer" })
 -- mini.icons for picker icons
 require("mini.icons").setup()
