@@ -21,21 +21,31 @@ local icons = {
 	fish = "󰶻",
 	lua = "",
 	python = "",
-	-- development
+	-- development/editors
 	nvim = "",
+	emacs = "",
+	nano = "",
+	micro = "",
+	code = "",
+	codium = "",
 	git = "󰊢",
 	tmux = "",
 	["[tmux]"] = "", -- in practice, doesn't seem to appear often
-	-- utilities & tools
+	-- GNU(-like) utilities
+	sudo = "",
+	cp = "",
+	rm = "󱀷",
+	man = "󰈙",
+	less = "󰈙",
+	more = "󰈙",
 	find = "",
 	grep = "",
-	rm = "󱀷",
-	cp = "",
 	ssh = "󰌘",
-	sudo = "",
 	history = "",
+	-- non-default tools
 	fd = "",
 	rg = "",
+	fzf = "",
 	bcompare = "",
 }
 
