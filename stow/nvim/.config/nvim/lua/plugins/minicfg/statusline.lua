@@ -1,4 +1,4 @@
--- Statusline
+local statusline = require("mini.statusline")
 -- This module has a dedicated file due to how large it gets.
 local function section_scrollbar(args)
     vim.api.nvim_set_hl(0, "MiniStatuslineScrollbar", {
@@ -40,58 +40,55 @@ local function section_scrollbar(args)
     return char, "MiniStatuslineScrollbar"
 end
 
-local statusline = require("mini.statusline")
+local function section_overseer(args)
+    if MiniStatusline.is_truncated(args.trunc_width) then
+        return "", nil
+    end
+    local overseer = require("overseer")
+    local tasks = overseer.list_tasks({
+        status = {
+            overseer.STATUS.PENDING,
+            overseer.STATUS.RUNNING,
+            overseer.STATUS.SUCCESS,
+            overseer.STATUS.FAILURE,
+            overseer.STATUS.CANCELED,
+        },
+        sort = require("overseer.task_list").sort_finished_recently,
+    })
+
+    local recent_task = tasks[1]
+    if recent_task then
+        if MiniStatusline.is_truncated(args.trunc_width) then
+            return recent_task.status, "Overseer" .. recent_task.status
+        else
+            return string.format("%s: %s", recent_task.name, recent_task.status), "Overseer" .. recent_task.status
+        end
+    else
+        return nil, nil
+    end
+end
+
+-- very similar to builtin function, but I made a few changes to be more straightforward.
+local function section_lsp(args)
+    if MiniStatusline.is_truncated(args.trunc_width) then
+        return ""
+    end
+    local client = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })[1]
+    -- lazy dumb method, but I don't expect more than one client per buffer usually
+    if client == nil then
+        return ""
+    end
+
+    if client.initialized and not client:is_stopped() then
+        -- TODO: find better icon?
+        return " " .. client.name
+    end
+    return ""
+end
+
 statusline.setup({
     content = {
         active = function()
-            local function section_overseer(args)
-                if MiniStatusline.is_truncated(args.trunc_width) then
-                    return "", nil
-                end
-                local overseer = require("overseer")
-                local tasks = overseer.list_tasks({
-                    status = {
-                        overseer.STATUS.PENDING,
-                        overseer.STATUS.RUNNING,
-                        overseer.STATUS.SUCCESS,
-                        overseer.STATUS.FAILURE,
-                        overseer.STATUS.CANCELED,
-                    },
-                    sort = require("overseer.task_list").sort_finished_recently,
-                })
-
-                local recent_task = tasks[1]
-                if recent_task then
-                    if MiniStatusline.is_truncated(args.trunc_width) then
-                        return recent_task.status, "Overseer" .. recent_task.status
-                    else
-                        return string.format("%s: %s", recent_task.name, recent_task.status),
-                            "Overseer" .. recent_task.status
-                    end
-                else
-                    return nil, nil
-                end
-            end
-
-            -- very similar to builtin function, but I made a few changes to be more straightforward.
-            local function section_lsp(args)
-                if MiniStatusline.is_truncated(args.trunc_width) then
-                    return ""
-                end
-                local client = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })[1]
-                -- lazy dumb method, but I don't expect more than one client per buffer usually
-                if client == nil then
-                    return ""
-                end
-
-                if client.initialized and not client:is_stopped() then
-                    -- TODO: find better icon?
-                    return " " .. client.name
-                end
-                return ""
-            end
-
-            -- rare usage of `math.huge`???
             local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = math.huge })
             -- set some hl groups here. indecisive if i should move them to colorscheme, but this seems more straightforward
             vim.api.nvim_set_hl(0, "MiniStatuslineModeSeparator" .. mode, {
@@ -107,9 +104,9 @@ statusline.setup({
             if submode ~= nil then
                 mode = mode and string.sub(submode, 1, 1) or mode
             end
-            local git = MiniStatusline.section_git({ trunc_width = 40 })
-            local diff = MiniStatusline.section_diff({ trunc_width = 75, icon = "󰇂" })
-            local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+            local git = MiniStatusline.section_git({ trunc_width = 40, icon = "󰊢" })
+            local diff = MiniStatusline.section_diff({ trunc_width = 75 })
+            local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75, icon = "" })
             local lsp = section_lsp({ trunc_width = 75 })
             local filename = MiniStatusline.section_filename({ trunc_width = 140 })
             local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
