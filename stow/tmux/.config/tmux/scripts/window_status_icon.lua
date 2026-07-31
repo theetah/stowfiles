@@ -1,0 +1,42 @@
+#!/usr/bin/env lua
+-- I understand this is not the most portable language for this endeavor.
+-- Too bad! Shell languages are not fun to work with.
+
+-- print(arg[1])
+
+-- some arbitrary input sanitization
+local s = arg[1]
+if string.find(s, "python") then
+	s = "python"
+end
+
+-- find use for  ?
+local icons = {
+	-- languages, etc.
+	sh = "",
+	csh = "%",
+	zsh = "%",
+	tcsh = "%",
+	bash = "",
+	fish = "󰶻",
+	lua = "",
+	python = "",
+	-- development
+	nvim = "",
+	git = "󰊢",
+	tmux = "",
+	["[tmux]"] = "", -- in practice, doesn't seem to appear often
+	-- utilities & tools
+	find = "",
+	grep = "",
+	rm = "󱀷",
+	cp = "",
+	ssh = "󰌘",
+	sudo = "",
+	history = "",
+	fd = "",
+	rg = "",
+	bcompare = "",
+}
+
+io.stdout:write(icons[s] or "")
