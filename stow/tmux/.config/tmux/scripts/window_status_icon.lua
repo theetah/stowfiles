@@ -18,7 +18,7 @@ local icons = {
 	zsh = "%",
 	tcsh = "%",
 	bash = "",
-	fish = "󰶻",
+	fish = ">", -- alternatives include "󰻳" "󰈺" "" "" ""
 	lua = "",
 	python = "",
 	-- development/editors
