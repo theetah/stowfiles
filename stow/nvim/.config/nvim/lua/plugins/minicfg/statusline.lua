@@ -1,45 +1,5 @@
 local statusline = require("mini.statusline")
 -- This module has a dedicated file due to how large it gets.
-local function section_scrollbar(args)
-    vim.api.nvim_set_hl(0, "MiniStatuslineScrollbar", {
-        fg = "#b4b7b4",
-        bg = "#393939",
-        reverse = true,
-    })
-    if MiniStatusline.is_truncated(args.trunc_width) then
-        return "▓", "MiniStatuslineScrollbar"
-    end
-    local line_current = vim.fn.line(".")
-    local line_end = vim.fn.line("$")
-    local char = ""
-    local p = line_current / line_end
-    -- █▇▆▅▄▃▂▁
-    if line_end == 1 then
-        char = "▓"
-    else
-        if p < 0.125 then
-            char = "█"
-        elseif p < 0.250 then
-            char = "▇"
-        elseif p < 0.375 then
-            char = "▆"
-        elseif p < 0.500 then
-            char = "▅"
-        elseif p < 0.625 then
-            char = "▄"
-        elseif p < 0.750 then
-            char = "▃"
-        elseif p < 0.875 then
-            char = "▂"
-        elseif p < 1.00 then
-            char = "▁"
-        else
-            char = " "
-        end
-    end
-    return char, "MiniStatuslineScrollbar"
-end
-
 local function section_overseer(args)
     if MiniStatusline.is_truncated(args.trunc_width) then
         return "", nil
@@ -113,7 +73,6 @@ statusline.setup({
             -- local location = MiniStatusline.section_location({ trunc_width = 75 })
             local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
             local overseer, overseer_hl = section_overseer({ trunc_width = 140 })
-            local scrollbar, scrollbar_hl = section_scrollbar({ trunc_width = 25 })
 
             return MiniStatusline.combine_groups({
                 { hl = mode_hl, strings = { mode } },
@@ -121,19 +80,16 @@ statusline.setup({
                 "%<", -- Mark general truncate point
                 { hl = "MiniStatuslineFilename", strings = { filename } },
                 "%=", -- End left alignment
+                { hl = "MiniStatuslineFilename", strings = { "%S" } },
                 { hl = overseer_hl, strings = { overseer } },
                 { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
                 -- nil -> keep previous section highlight
-                { hl = "MiniStatuslineSearchCount", strings = { search } },
-                "%#" .. scrollbar_hl .. "#" .. scrollbar,
-                "%#MiniStatuslineFileinfo# ",
-                -- "%#MiniStatuslineMode" .. mode .. "# ",
-                -- "%#MiniStatuslineModeSeparator" .. mode .. "#🮇",
+                { hl = "MiniStatuslineSearchCount", strings = { search ~= "" and vim.fn.getreg("/"), search } },
+                { hl = "MiniStatuslineFileInfo", strings = { "%p%%" } },
             })
         end,
         inactive = function()
             local filename = MiniStatusline.section_filename({ trunc_width = 140 })
-            local scrollbar, scrollbar_hl = section_scrollbar({ trunc_width = 25 })
             -- override bg color here to be a bit darker
             vim.api.nvim_set_hl(0, "MiniStatuslineScrollbar", {
                 fg = "#777777",
@@ -144,8 +100,6 @@ statusline.setup({
                 { hl = "MiniStatuslineFilename", strings = { filename } },
                 "%=", -- End left alignment
                 "%<", -- Mark general truncate point
-                "%#" .. scrollbar_hl .. "#" .. scrollbar,
-                "%#MiniStatuslineFilename# ",
             })
         end,
     },

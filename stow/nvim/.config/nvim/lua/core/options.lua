@@ -27,6 +27,10 @@ local options = {
         cursorline = true,
         -- Minimal number of screen lines to keep above and below the cursor.
         scrolloff = 4,
+        -- Hide the commandline if it's not being used
+        cmdheight = 0,
+        -- Show the current command in the statusline
+        showcmdloc = "statusline",
         -- Duplicate these here since they might not apply otherwise
         tabstop = 4,
         shiftwidth = 4,
