@@ -47,6 +47,7 @@ local icons = {
 	rg = "",
 	fzf = "",
 	bcompare = "",
+	flatpak = "󰏖",
 }
 
 io.stdout:write(icons[s] or "")
