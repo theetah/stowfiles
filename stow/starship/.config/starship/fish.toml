@@ -3,7 +3,7 @@ $sudo\
 $directory\
 $character\
 """
-# [▍](fg:overlay_fg2)\
+# [▍](fg:dark_grey_2)\
 
 right_format = """
 $cmd_duration\
@@ -11,22 +11,22 @@ $jobs\
 $git_branch\
 $git_status
 $status\
-[🮈](fg:overlay_fg2)\
+[🮈](fg:dark_grey_2)\
 """
 
 add_newline = false
 palette = "decaf"
 
 [palettes.decaf]
-prompt_fg = '#eeeeee'
-text_fg = '#cccccc' # fg for more important elements, too dim to use on prompt itself
+black = '#222222'
+dark_background = '#292929'
 background = '#2d2d2d'
-# overlays, or colors that are used for user interface-like situations
-overlay_bg1 = '#282828'
-overlay_bg2 = '#2a2a2a'
-overlay_fg2 = '#5c5c5c'
-overlay_fg1 = '#777777'
-# generic colors
+dark_grey_1='#393939'
+dark_grey_2='#515151'
+light_grey_1='#777777'
+light_grey_2='#b4b7b4'
+text = '#cccccc'
+prompt_text = '#eeeeee'
 red = '#ff7f7b'
 orange = '#ffbf70'
 yellow = '#ffd67c'
@@ -45,7 +45,7 @@ format = '[\[$symbol\] ]($style)'
 disabled = true
 
 [os]
-style = 'fg:prompt_fg'
+style = 'fg:prompt_text'
 format = '[$symbol ]($style)'
 disabled = false
 
@@ -63,7 +63,7 @@ fish_style_pwd_dir_length = 3
 ### RIGHT PROMPT
 
 [cmd_duration]
-style = 'fg:overlay_fg1'
+style = 'fg:light_grey_1'
 format = '[$duration]($style)'
 # min_time = 0
 # show_milliseconds = true
@@ -76,7 +76,7 @@ format = '[ $symbol $number]($style)'
 
 [git_branch]
 symbol = '@'
-style = 'fg:prompt_fg'
+style = 'fg:prompt_text'
 format = '[ $symbol$branch]($style)'
 
 [git_status]
@@ -92,7 +92,7 @@ format = '(\[$all_status\])'
 
 [fill]
 symbol = '▁'
-style = 'fg:overlay_bg1'
+style = 'fg:dark_background'
 
 [status]
 style = 'red'
