@@ -59,6 +59,10 @@ statusline.setup({
                 fg = vim.api.nvim_get_hl(0, { name = "CurSearch" }).bg,
                 bg = vim.api.nvim_get_hl(0, { name = "MiniStatuslineFileinfo" }).bg,
             })
+            vim.api.nvim_set_hl(0, "MiniStatuslineMacroActive", {
+                fg = vim.api.nvim_get_hl(0, { name = "String" }).fg,
+                bg = vim.api.nvim_get_hl(0, { name = "MiniStatuslineFileinfo" }).bg,
+            })
             -- Allow submode to replace current mode if active
             local submode = require("submode").mode()
             if submode ~= nil then
@@ -85,6 +89,10 @@ statusline.setup({
                 { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
                 -- nil -> keep previous section highlight
                 { hl = "MiniStatuslineSearchCount", strings = { search ~= "" and vim.fn.getreg("/"), search } },
+                {
+                    hl = "MiniStatuslineMacroActive",
+                    strings = { vim.fn.reg_recording() ~= "" and "recording @" .. vim.fn.reg_recording() },
+                },
                 { hl = "MiniStatuslineFileInfo", strings = { "%p%%" } },
             })
         end,
