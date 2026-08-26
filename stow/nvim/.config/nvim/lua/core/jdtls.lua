@@ -1,8 +1,9 @@
 local module = {}
+local USER = os.getenv("USER")
 
 function module:setup()
     local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-    local workspace_dir = "/home/hache/.jdtls/data/" .. project_name
+    local workspace_dir = "/home/" .. USER .. "/.jdtls/data/" .. project_name
     local config = {
         -- The command that starts the language server
         -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
@@ -26,15 +27,15 @@ function module:setup()
 
             -- 💀
             "-jar",
-            "/home/hache/.local/bin/org.eclipse.equinox.launcher_1.7.0.v20250519-0528.jar",
+            "/home/" .. USER .. "/.local/bin/org.eclipse.equinox.launcher_1.7.0.v20250519-0528.jar",
             -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
             -- Must point to the                                                     Change this to
             -- eclipse.jdt.ls installation                                           the actual version
 
             -- 💀
             "-configuration",
-            -- "/home/hache/.jdtls/config_linux",
-            "/home/hache/.local/share/nvim/mason/packages/jdtls/config_linux",
+            -- "/home/"..USER.."/.jdtls/config_linux",
+            "/home/" .. USER .. "/.local/share/nvim/mason/packages/jdtls/config_linux",
             -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
             -- Must point to the                      Change to one of `linux`, `win` or `mac`
             -- eclipse.jdt.ls installation            Depending on your system.
