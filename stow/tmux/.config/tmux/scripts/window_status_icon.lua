@@ -15,7 +15,7 @@ local icons = {
 	-- languages, etc.
 	sh = "",
 	csh = "%",
-	zsh = "%",
+	zsh = "",
 	tcsh = "%",
 	bash = "",
 	fish = ">", -- alternatives include "󰻳" "󰈺" "" "" ""
@@ -34,18 +34,21 @@ local icons = {
 	-- GNU(-like) utilities
 	sudo = "",
 	cp = "",
-	rm = "󱀷",
-	man = "󰈙",
-	less = "󰈙",
-	more = "󰈙",
+	rm = "",
+	man = "",
+	less = "",
+	more = "",
+	cat = "󰈙",
 	find = "",
 	grep = "",
 	ssh = "󰌘",
 	history = "",
+	ping = "󰀃",
 	-- non-default tools
 	fd = "",
 	rg = "",
 	fzf = "",
+	bat = "󰈙",
 	bcompare = "",
 	flatpak = "󰏖",
 }
