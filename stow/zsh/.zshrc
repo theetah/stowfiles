@@ -49,7 +49,7 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 export EDITOR=/usr/bin/nvim
 export DOTNET_ROOT=$HOME/.dotnet
-export BAT_THEME="Tomorrow-Night"
+export BAT_THEME="ansi"
 
 # Aliases
 # WARN: Below alias will ensure any other aliases are expanded with sudo. Security risk.
