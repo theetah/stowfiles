@@ -61,7 +61,7 @@ statusline.setup({
             })
             vim.api.nvim_set_hl(0, "MiniStatuslineMacroActive", {
                 fg = vim.api.nvim_get_hl(0, { name = "String" }).fg,
-                bg = vim.api.nvim_get_hl(0, { name = "MiniStatuslineFileinfo" }).bg,
+                bg = vim.api.nvim_get_hl(0, { name = "MiniStatuslineFilename" }).bg,
             })
             -- Allow submode to replace current mode if active
             local submode = require("submode").mode()
@@ -84,15 +84,14 @@ statusline.setup({
                 "%<", -- Mark general truncate point
                 { hl = "MiniStatuslineFilename", strings = { filename } },
                 "%=", -- End left alignment
-                { hl = "MiniStatuslineFilename", strings = { "%S" } },
-                { hl = overseer_hl, strings = { overseer } },
-                { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
-                -- nil -> keep previous section highlight
-                { hl = "MiniStatuslineSearchCount", strings = { search ~= "" and vim.fn.getreg("/"), search } },
+                { hl = "MiniStatuslineFilename", strings = { "%S" } }, -- last key pressed
                 {
                     hl = "MiniStatuslineMacroActive",
                     strings = { vim.fn.reg_recording() ~= "" and "recording @" .. vim.fn.reg_recording() },
                 },
+                { hl = overseer_hl, strings = { overseer } },
+                { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+                { hl = "MiniStatuslineSearchCount", strings = { search ~= "" and vim.fn.getreg("/"), search } },
                 { hl = "MiniStatuslineFileInfo", strings = { "%p%%" } },
             })
         end,
