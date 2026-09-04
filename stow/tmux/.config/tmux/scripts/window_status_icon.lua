@@ -1,10 +1,7 @@
 #!/usr/bin/env lua
 -- I understand this is not the most portable language for this endeavor.
--- Too bad! Shell languages are not fun to work with.
 
--- print(arg[1])
-
--- some arbitrary input sanitization
+-- arbitrary input sanitization
 local s = arg[1]
 if string.find(s, "python") then
 	s = "python"
