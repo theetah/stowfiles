@@ -49,7 +49,7 @@ end
 statusline.setup({
     content = {
         active = function()
-            local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = math.huge })
+            local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 140 })
             -- set some hl groups here. indecisive if i should move them to colorscheme, but this seems more straightforward
             vim.api.nvim_set_hl(0, "MiniStatuslineModeSeparator" .. mode, {
                 fg = vim.api.nvim_get_hl(0, { name = "MiniStatuslineMode" .. mode }).bg,
@@ -66,7 +66,7 @@ statusline.setup({
             -- Allow submode to replace current mode if active
             local submode = require("submode").mode()
             if submode ~= nil then
-                mode = mode and string.sub(submode, 1, 1) or mode
+                mode = mode and submode or mode
             end
             local git = MiniStatusline.section_git({ trunc_width = 40, icon = "󰊢" })
             local diff = MiniStatusline.section_diff({ trunc_width = 75 })
@@ -92,7 +92,7 @@ statusline.setup({
                 { hl = overseer_hl, strings = { overseer } },
                 { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
                 { hl = "MiniStatuslineSearchCount", strings = { search ~= "" and vim.fn.getreg("/"), search } },
-                { hl = "MiniStatuslineFileInfo", strings = { "%p%%" } },
+                { hl = mode_hl, strings = { "%p%%" } },
             })
         end,
         inactive = function()
