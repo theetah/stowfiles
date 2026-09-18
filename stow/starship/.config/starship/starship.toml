@@ -3,8 +3,6 @@ $sudo\
 $directory\
 $character\
 """
-# [▍]\
-# (fg:overlay_bg2)\
 
 right_format = """
 $cmd_duration\
@@ -12,15 +10,11 @@ $jobs\
 $git_branch\
 $git_status
 $status\
+[🮈](fg:dark_grey_2)\
 """
 
 add_newline = false
-
-# [🮈]\
-# (fg:overlay_bg2)\
-# """
-
-palette = "decaf"
+palette = 'decaf'
 
 [palettes.tomorrow_night]
 prompt_fg = '#eeeeee'
@@ -134,16 +128,6 @@ style = 'fg:yellow'
 format = '[\[$symbol\] ]($style)'
 disabled = true
 
-# NOTE: currently unused
-[os]
-style = 'fg:prompt_fg'
-format = '[$symbol ]($style)'
-disabled = false
-
-[os.symbols]
-Fedora = ''
-Void = ''
-
 [directory]
 style = 'fg:green bold'
 format = '[$path ]($style)'
@@ -172,14 +156,17 @@ format = '[ $symbol$branch]($style)'
 
 [git_status]
 # style = 'bg:background'
-modified = '[󰇂](fg:yellow)'
-deleted = '[󰍴](fg:red)'
-stashed = '[󰏗](fg:orange)'
-untracked = '[?](fg:green)'
-renamed = '[󰑕](fg:orange)'
-staged = '[󰢪](fg:blue)'
+modified = '[M](fg:yellow)'
+deleted = '[D](fg:red)'
+stashed = '[S](fg:orange)'
+untracked = '[U](fg:green)'
+renamed = '[R](fg:orange)'
+staged = '[S](fg:blue)'
+ahead = '[A](fg:magenta)'
+behind = '[B](fg:magenta)'
+diverged = '[D](fg:magenta)'
 # no space, attach it to the `git_branch` module
-format = '(\[$all_status\])'
+format = '(\[$all_status$ahead_behind\])'
 
 [fill]
 symbol = '▁'

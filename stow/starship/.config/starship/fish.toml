@@ -3,7 +3,6 @@ $sudo\
 $directory\
 $character\
 """
-# [▍](fg:dark_grey_2)\
 
 right_format = """
 $cmd_duration\
@@ -15,7 +14,7 @@ $status\
 """
 
 add_newline = false
-palette = "decaf"
+palette = 'decaf'
 
 [palettes.decaf]
 black = '#222222'
@@ -43,15 +42,6 @@ symbol = 's'
 style = 'fg:yellow'
 format = '[\[$symbol\] ]($style)'
 disabled = true
-
-[os]
-style = 'fg:prompt_text'
-format = '[$symbol ]($style)'
-disabled = false
-
-[os.symbols]
-Fedora = ''
-Void = ''
 
 [directory]
 style = 'fg:green bold'
@@ -81,14 +71,17 @@ format = '[ $symbol$branch]($style)'
 
 [git_status]
 # style = 'bg:background'
-modified = '[󰇂](fg:yellow)'
-deleted = '[󰍴](fg:red)'
-stashed = '[󰏗](fg:orange)'
-untracked = '[?](fg:green)'
-renamed = '[󰑕](fg:orange)'
-staged = '[󰢪](fg:green)'
+modified = '[M](fg:yellow)'
+deleted = '[D](fg:red)'
+stashed = '[S](fg:orange)'
+untracked = '[U](fg:green)'
+renamed = '[R](fg:orange)'
+staged = '[S](fg:blue)'
+ahead = '[A](fg:magenta)'
+behind = '[B](fg:magenta)'
+diverged = '[D](fg:magenta)'
 # no space, attach it to the `git_branch` module
-format = '(\[$all_status\])'
+format = '(\[$all_status$ahead_behind\])'
 
 [fill]
 symbol = '▁'
@@ -105,12 +98,12 @@ format = '[ $indicator]($style)'
 # bash_indicator tends to not work for some reason :c
 bash_indicator = ' '
 fish_indicator = ' '
-zsh_indicator = '%_'
+zsh_indicator = ''
 unknown_indicator = '?'
 disabled = true
 
 # toml will not calm down unless this part is put last
 [character]
 format = '$symbol '
-success_symbol = ">"
-error_symbol = "[>](red)"
+success_symbol = '>'
+error_symbol = '[>](red)'
