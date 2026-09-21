@@ -104,6 +104,7 @@ return {
 
         local native_servers = {
             jdtls = {},
+            gdscript = {},
         }
 
         for srv, _ in pairs(native_servers) do
@@ -157,7 +158,6 @@ return {
             zuban = {},
         }
 
-        local servers = vim.tbl_deep_extend("force", native_servers, mason_servers)
         local capabilities = vim.lsp.protocol.make_client_capabilities()
 
         -- Ensure the servers and tools above are installed
@@ -170,7 +170,7 @@ return {
 
         -- You can add other tools here that you want Mason to install
         -- for you, so that they are available from within Neovim.
-        local ensure_installed = vim.tbl_keys(servers or {})
+        local ensure_installed = vim.tbl_keys(mason_servers or {})
         vim.list_extend(ensure_installed, {
             "stylua", -- Used to format Lua code
         })
@@ -179,7 +179,7 @@ return {
         require("mason-lspconfig").setup({
             handlers = {
                 function(server_name)
-                    local server = servers[server_name] or {}
+                    local server = mason_servers[server_name] or {}
                     -- This handles overriding only values explicitly passed
                     -- by the server configuration above. Useful when disabling
                     -- certain features of an LSP (for example, turning off formatting for tsserver)
