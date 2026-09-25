@@ -2,50 +2,66 @@
 
 local cwd = arg[1]
 
--- 2. if there is a U in a row, or a row is AA, merge conflict
--- 3. if anything else in left column, simply indicate staged
-
--- data:
--- letter (such as M)
--- count
--- label (such as Modified)
---
--- have separate counter for staged (keep functionality similar to starship)
-
--- TODO: colors
-local counts = {
-	M = {
-		count = 0,
-		label = "MODIFIED",
+local data = {
+	chars = {
+		M = {
+			found = false,
+			label = "M",
+			color = "#ffd67c",
+		},
+		["?"] = {
+			found = false,
+			label = "?",
+			color = "#beda78",
+		},
+		A = {
+			found = false,
+			label = "A",
+			color = "#beda78",
+		},
+		R = {
+			found = false,
+			label = "R",
+			color = "#ffd67c",
+		},
+		C = {
+			found = false,
+			label = "C",
+			color = "#beda78",
+		},
+		D = {
+			found = false,
+			label = "D",
+			color = "#ff7f7b",
+		},
+		T = {
+			found = false,
+			label = "T",
+			color = "#bed6ff",
+		},
 	},
-	["?"] = {
-		count = 0,
-		label = "UNTRACKED",
+	switches = {
+		MERGE_CONFLICT = {
+			found = false,
+			label = "CONFLICT",
+			color = "#ff7f7b",
+		},
+		STASHED = {
+			found = false,
+			label = "STASHED",
+			color = "#ffbf70",
+		},
+		STAGED = {
+			found = false,
+			label = "STAGED",
+			color = "#90bee1",
+		},
 	},
-	A = {
-		count = 0,
-		label = "ADDED",
-	},
-	D = {
-		count = 0,
-		label = "DELETED",
-	},
-	R = {
-		count = 0,
-		label = "RENAMED",
-	},
-	C = {
-		count = 0,
-		label = "COPIED",
-	},
-	T = {
-		count = 0,
-		label = "TYPECHANGE",
-	},
-	MERGE_CONFLICT = false,
-	STASHED = false,
-	STAGED = false,
 }
+
+-- 1. if there is a U in a row, or a row is AA, merge conflict
+-- 2. if anything else in left column, simply indicate staged
+-- 3. if not either above, treat as normal
 
 local function format_status()
 	local status, git_status, stash_exists = pcall(function()
@@ -61,8 +77,7 @@ local function format_status()
 		return status, stash
 	end)
 
-	-- fatal: not a git repository
-	if not status then
+	if not status or (git_status == "" and stash_exists == "") then
 		return ""
 	end
 
@@ -73,18 +88,58 @@ local function format_status()
 	end
 
 	for _, v in pairs(lines) do
-		print("ENTRY: " .. v)
 		if string.find(v, "U") or v == "AA" then
-			counts.MERGE_CONFLICT = true
+			data.switches.MERGE_CONFLICT.found = true
 		elseif string.len(stash_exists) > 0 then
-			counts.STASHED = true
-		elseif string.sub(v, 1, 1) ~= " " then
-			counts.STAGED = true
+			data.switches.STASHED.found = true
+		elseif string.sub(v, 1, 1) ~= " " and string.sub(v, 1, 1) ~= "?" then
+			data.switches.STAGED.found = true
+		else
+			for char, t in pairs(data.chars) do
+				if string.find(v, char) then
+					t.found = true
+				end
+			end
 		end
 	end
 
-	-- TODO:
-	return ""
+	local num_statuses = 0
+	for _, t in pairs(data.chars) do
+		if t.found then
+			num_statuses = num_statuses + 1
+		end
+	end
+	for _, t in pairs(data.switches) do
+		if t.found then
+			num_statuses = num_statuses + 1
+		end
+	end
+
+	local STATUS_SIZE = 10
+
+	local output = ""
+	for _, t in pairs(data.chars) do
+		if t.found then
+			output = output
+				.. "#[fg="
+				.. t.color
+				.. "]"
+				.. string.sub(t.label, 1, math.floor(STATUS_SIZE / num_statuses))
+				.. "#[default]"
+		end
+	end
+	for _, t in pairs(data.switches) do
+		if t.found then
+			output = output
+				.. "#[fg="
+				.. t.color
+				.. "]"
+				.. string.sub(t.label, 1, math.floor(STATUS_SIZE / num_statuses))
+				.. "#[default]"
+		end
+	end
+
+	return output
 end
 
 io.stdout:write(format_status())
