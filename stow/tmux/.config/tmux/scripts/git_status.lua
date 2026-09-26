@@ -1,61 +1,72 @@
 #!/usr/bin/env lua
 
 local cwd = arg[1]
+local variant = arg[2]
 
-local data = {
-	chars = {
-		M = {
-			found = false,
-			label = "M",
-			color = "#ffd67c",
-		},
-		["?"] = {
-			found = false,
-			label = "?",
-			color = "#beda78",
-		},
-		A = {
-			found = false,
-			label = "A",
-			color = "#beda78",
-		},
-		R = {
-			found = false,
-			label = "R",
-			color = "#ffd67c",
-		},
-		C = {
-			found = false,
-			label = "C",
-			color = "#beda78",
-		},
-		D = {
-			found = false,
-			label = "D",
-			color = "#ff7f7b",
-		},
-		T = {
-			found = false,
-			label = "T",
-			color = "#bed6ff",
-		},
+local states = {
+	{
+		found = false,
+		label = "M",
+		color = "#ffd67c",
 	},
-	switches = {
-		MERGE_CONFLICT = {
-			found = false,
-			label = "CONFLICT",
-			color = "#ff7f7b",
-		},
-		STASHED = {
-			found = false,
-			label = "STASHED",
-			color = "#ffbf70",
-		},
-		STAGED = {
-			found = false,
-			label = "STAGED",
-			color = "#90bee1",
-		},
+	{
+		found = false,
+		label = "?",
+		color = "#beda78",
+	},
+	{
+		found = false,
+		label = "A",
+		color = "#beda78",
+	},
+	{
+		found = false,
+		label = "R",
+		color = "#ffd67c",
+	},
+	{
+		found = false,
+		label = "C",
+		color = "#beda78",
+	},
+	{
+		found = false,
+		label = "D",
+		color = "#ff7f7b",
+	},
+	{
+		found = false,
+		label = "T",
+		color = "#bed6ff",
+	},
+}
+
+local contexts = {
+	MERGE_CONFLICT = {
+		found = false,
+		label = "C",
+		color = "#ff7f7b",
+	},
+	STASHED = {
+		found = false,
+		label = "S",
+		color = "#ffbf70",
+	},
+	STAGED = {
+		found = false,
+		label = "S",
+		color = "#90bee1",
+	},
+}
+
+local offsets = {
+	AHEAD = {
+		label = "+",
+		color = "#ff93b3",
+	},
+	BEHIND = {
+		label = "-",
+		color = "#ff93b3",
 	},
 }
 
@@ -64,20 +75,36 @@ local data = {
 -- 3. if not either above, treat as normal
 
 local function format_status()
-	local status, git_status, stash_exists = pcall(function()
+	local success, git_status, stash_exists, ahead, behind = pcall(function()
 		-- `-C` arg allows us to execute git in a different path as if it was the cwd.
+		-- status
 		local handle = io.popen("git -C " .. cwd .. " status --porcelain")
 		assert(handle ~= nil)
 		local status = handle:read("*a")
 		handle:close()
+
+		-- stash
 		handle = io.popen("git -C " .. cwd .. " stash list")
 		assert(handle ~= nil)
 		local stash = handle:read("*a")
 		handle:close()
-		return status, stash
+
+		-- ahead
+		handle = io.popen("git -C " .. cwd .. " rev-list --count @{u}..HEAD")
+		assert(handle ~= nil)
+		local a = handle:read("*a")
+		handle:close()
+
+		-- behind
+		handle = io.popen("git -C " .. cwd .. " rev-list --count HEAD..@{u}")
+		assert(handle ~= nil)
+		local b = handle:read("*a")
+		handle:close()
+
+		return status, stash, a, b
 	end)
 
-	if not status or (git_status == "" and stash_exists == "") then
+	if not success or (git_status == "" and stash_exists == "") then
 		return ""
 	end
 
@@ -87,29 +114,30 @@ local function format_status()
 		table.insert(lines, string.sub(match, 1, 2))
 	end
 
+	if string.len(stash_exists) > 0 then
+		contexts.STASHED.found = true
+	end
+
 	for _, v in pairs(lines) do
 		if string.find(v, "U") or v == "AA" then
-			data.switches.MERGE_CONFLICT.found = true
-		elseif string.len(stash_exists) > 0 then
-			data.switches.STASHED.found = true
+			contexts.MERGE_CONFLICT.found = true
 		elseif string.sub(v, 1, 1) ~= " " and string.sub(v, 1, 1) ~= "?" then
-			data.switches.STAGED.found = true
+			contexts.STAGED.found = true
 		else
-			for char, t in pairs(data.chars) do
-				if string.find(v, char) then
+			for _, t in ipairs(states) do
+				if string.find(v, t.label) then
 					t.found = true
 				end
 			end
 		end
 	end
 
-	local num_statuses = 0
-	for _, t in pairs(data.chars) do
-		if t.found then
-			num_statuses = num_statuses + 1
-		end
+	for _, v in pairs(contexts) do
+		table.insert(states, v)
 	end
-	for _, t in pairs(data.switches) do
+
+	local num_statuses = 0
+	for _, t in ipairs(states) do
 		if t.found then
 			num_statuses = num_statuses + 1
 		end
@@ -117,28 +145,39 @@ local function format_status()
 
 	local STATUS_SIZE = 10
 
+	table.sort(states, function(a, b)
+		return a.label < b.label
+	end)
+
 	local output = ""
-	for _, t in pairs(data.chars) do
-		if t.found then
-			output = output
-				.. "#[fg="
-				.. t.color
-				.. "]"
-				.. string.sub(t.label, 1, math.floor(STATUS_SIZE / num_statuses))
-				.. "#[default]"
-		end
+
+	if tonumber(ahead) > 0 then
+		local c = variant == "unfocused" and "#515151" or offsets.AHEAD.color
+		output = output .. "#[fg=" .. c .. "]" .. offsets.AHEAD.label .. ahead .. "#[fg=default]"
+	elseif tonumber(behind) > 0 then
+		local c = variant == "unfocused" and "#515151" or offsets.BEHIND.color
+		output = output .. "#[fg=" .. c .. "]" .. offsets.BEHIND.label .. behind .. "#[fg=default]"
 	end
-	for _, t in pairs(data.switches) do
+
+	for _, t in pairs(states) do
 		if t.found then
+			local c = variant == "unfocused" and "#515151" or t.color
 			output = output
 				.. "#[fg="
-				.. t.color
+				.. c
 				.. "]"
 				.. string.sub(t.label, 1, math.floor(STATUS_SIZE / num_statuses))
-				.. "#[default]"
+				.. "#[fg=default]"
 		end
 	end
 
+	if variant == "unfocused" then
+		output = "#[fg=#515151][#[fd=default]" .. output .. "#[fg=#515151]]#[fg=default]"
+	else
+		output = "[" .. output .. "]"
+	end
+
+	output, _ = output:gsub("\n", "")
 	return output
 end
 
