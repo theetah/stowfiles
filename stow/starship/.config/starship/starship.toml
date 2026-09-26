@@ -153,6 +153,7 @@ format = '[ $symbol $number]($style)'
 symbol = '@'
 style = 'fg:prompt_fg'
 format = '[ $symbol$branch]($style)'
+disabled = true
 
 [git_status]
 # style = 'bg:background'
@@ -167,6 +168,7 @@ behind = '[B](fg:magenta)'
 diverged = '[D](fg:magenta)'
 # no space, attach it to the `git_branch` module
 format = '(\[$all_status$ahead_behind\])'
+disabled = true
 
 [fill]
 symbol = '▁'
