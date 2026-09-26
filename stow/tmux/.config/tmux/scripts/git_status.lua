@@ -44,12 +44,12 @@ local states = {
 local contexts = {
 	MERGE_CONFLICT = {
 		found = false,
-		label = "C",
+		label = "!",
 		color = "#ff7f7b",
 	},
 	STASHED = {
 		found = false,
-		label = "S",
+		label = "$",
 		color = "#ffbf70",
 	},
 	STAGED = {
