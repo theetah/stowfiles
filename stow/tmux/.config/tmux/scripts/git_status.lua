@@ -104,7 +104,7 @@ local function format_status()
 		return status, stash, a, b
 	end)
 
-	if not success or (git_status == "" and stash_exists == "") then
+	if not success or (git_status == "" and stash_exists == "" and tonumber(ahead) == 0 and tonumber(behind) == 0) then
 		return ""
 	end
 
