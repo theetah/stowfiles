@@ -16,21 +16,21 @@ $status\
 add_newline = false
 palette = 'decaf'
 
-[palettes.decaf]
-prompt_fg = '#eeeeee'
-text_fg = '#cccccc' # fg for more important elements, too dim to use on prompt itself
-background = '#2d2d2d'
-# OVERLAYS (background color of elements that are slightly lighter than terminal bg)
-overlay_bg1 = '#282828'
-overlay_bg2 = '#2a2a2a'
-overlay_fg1 = '#777777'
-overlay_fg2 = '#515151'
-# generic colors
-red = '#ff7f7b' # generally used for errors
-orange = '#ffbf70'
+[palettes.half]
+black = '#171717'
+dark_background = '#1f1f1f'
+background = '#242424'
+dark_grey_1='#2e2e2e'
+dark_grey_2='#474747'
+light_grey_1='#676767'
+light_grey_2='#b4b4b4'
+text = '#cccccc'
+prompt_text = '#eeeeee'
+red = '#ff7f7b'
+orange = '#ffb961'
 yellow = '#ffd67c'
 green = '#beda78'
-cyan = '#bed6ff'
+cyan = '#a1e6e0'
 blue = '#90bee1'
 purple = '#efb3f7'
 magenta = '#ff93b3'

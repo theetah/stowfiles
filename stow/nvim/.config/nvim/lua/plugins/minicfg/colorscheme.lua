@@ -1,23 +1,25 @@
 -- General editor colorscheme
+local palette = {
+    base00 = "#242424",
+    base01 = "#2e2e2e",
+    base02 = "#474747",
+    base03 = "#676767",
+    base04 = "#b4b4b4",
+    base05 = "#cccccc",
+    base06 = "#e0e0e0",
+    base07 = "#ffffff",
+    base08 = "#ff7f7b",
+    base09 = "#ffb961",
+    base0A = "#ffd67c",
+    base0B = "#beda78",
+    base0C = "#a1e6e0",
+    base0D = "#90bee1",
+    base0E = "#efb3f7",
+    base0F = "#ff93b3",
+}
+
 require("mini.base16").setup({
-    palette = {
-        base00 = "#2d2d2d",
-        base01 = "#393939",
-        base02 = "#515151",
-        base03 = "#777777",
-        base04 = "#b4b7b4",
-        base05 = "#cccccc",
-        base06 = "#e0e0e0",
-        base07 = "#ffffff",
-        base08 = "#ff7f7b",
-        base09 = "#ffbf70",
-        base0A = "#ffd67c",
-        base0B = "#beda78",
-        base0C = "#bed6ff",
-        base0D = "#90bee1",
-        base0E = "#efb3f7",
-        base0F = "#ff93b3",
-    },
+    palette = palette,
 })
 
 local set_hl = vim.api.nvim_set_hl
@@ -27,12 +29,12 @@ local get_hl = vim.api.nvim_get_hl
 -- mini.tabline colors --
 -------------------------
 local MiniTablineColors = {
-    fg_current = "#cccccc",
-    fg_visible = "#777777",
-    fg_modified = "#ffd67c",
-    bg_current = "#515151",
-    bg_visible = "#393939",
-    bg_hidden = "#262626",
+    fg_current = palette.base05,
+    fg_visible = palette.base03,
+    fg_modified = palette.base0A,
+    bg_current = palette.base02,
+    bg_visible = palette.base01,
+    bg_hidden = palette.base00,
 }
 set_hl(0, "MiniTablineCurrent", {
     fg = MiniTablineColors.fg_current,
@@ -61,14 +63,14 @@ set_hl(
 ----------------------------
 -- more fine-grained control for components' colors are stored in the statusline's config file.
 local MiniStatuslineColors = {
-    fg_mode = "#2d2d2d",
+    fg_mode = palette.base00,
     mode_bg_colors = {
-        Normal = "#90bee1",
-        Insert = "#beda78",
-        Command = "#ffd67c",
-        Visual = "#efb3f7",
-        Replace = "#ffbf70",
-        Other = "#ff7f7b",
+        Normal = palette.base0D,
+        Insert = palette.base0B,
+        Command = palette.base0A,
+        Visual = palette.base0E,
+        Replace = palette.base09,
+        Other = palette.base08,
     },
 }
 
@@ -89,5 +91,5 @@ end
 -- indent-blankline colors --
 -----------------------------
 
-set_hl(0, "CustomIndentBlanklineIndent", { fg = "#777777", bg = "NONE" })
-set_hl(0, "CustomIndentBlanklineScope", { fg = "#b4b7b4", bg = "NONE" })
+set_hl(0, "CustomIndentBlanklineIndent", { fg = palette.base03, bg = "NONE" })
+set_hl(0, "CustomIndentBlanklineScope", { fg = palette.base04, bg = "NONE" })

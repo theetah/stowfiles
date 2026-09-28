@@ -37,7 +37,7 @@ local states = {
 	{
 		found = false,
 		label = "T",
-		color = "#bed6ff",
+		color = "#a1e6e0",
 	},
 }
 
@@ -50,7 +50,7 @@ local contexts = {
 	STASHED = {
 		found = false,
 		label = "$",
-		color = "#ffbf70",
+		color = "#ffb961",
 	},
 	STAGED = {
 		found = false,
@@ -152,16 +152,16 @@ local function format_status()
 	local output = ""
 
 	if tonumber(ahead) > 0 then
-		local c = variant == "unfocused" and "#515151" or offsets.AHEAD.color
+		local c = variant == "unfocused" and "#474747" or offsets.AHEAD.color
 		output = output .. "#[fg=" .. c .. "]" .. offsets.AHEAD.label .. ahead .. "#[fg=default]"
 	elseif tonumber(behind) > 0 then
-		local c = variant == "unfocused" and "#515151" or offsets.BEHIND.color
+		local c = variant == "unfocused" and "#474747" or offsets.BEHIND.color
 		output = output .. "#[fg=" .. c .. "]" .. offsets.BEHIND.label .. behind .. "#[fg=default]"
 	end
 
 	for _, t in pairs(states) do
 		if t.found then
-			local c = variant == "unfocused" and "#515151" or t.color
+			local c = variant == "unfocused" and "#474747" or t.color
 			output = output
 				.. "#[fg="
 				.. c
@@ -172,7 +172,7 @@ local function format_status()
 	end
 
 	if variant == "unfocused" then
-		output = "#[fg=#515151][#[fd=default]" .. output .. "#[fg=#515151]]#[fg=default]"
+		output = "#[fg=#474747][#[fd=default]" .. output .. "#[fg=#474747]]#[fg=default]"
 	else
 		output = "[" .. output .. "]"
 	end

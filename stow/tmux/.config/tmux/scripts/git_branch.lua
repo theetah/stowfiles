@@ -18,7 +18,7 @@ local function git_branch()
 
 	local output = " @" .. b
 	if variant == "unfocused" then
-		output = "#[fg=#515151]" .. output .. "#[fg=default]"
+		output = "#[fg=#474747]" .. output .. "#[fg=default]"
 	end
 	return output
 end

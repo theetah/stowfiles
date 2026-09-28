@@ -14,23 +14,23 @@ $status\
 """
 
 add_newline = false
-palette = 'decaf'
+palette = 'half'
 
-[palettes.decaf]
-black = '#222222'
-dark_background = '#292929'
-background = '#2d2d2d'
-dark_grey_1='#393939'
-dark_grey_2='#515151'
-light_grey_1='#777777'
-light_grey_2='#b4b7b4'
+[palettes.half]
+black = '#171717'
+dark_background = '#1f1f1f'
+background = '#242424'
+dark_grey_1='#2e2e2e'
+dark_grey_2='#474747'
+light_grey_1='#676767'
+light_grey_2='#b4b4b4'
 text = '#cccccc'
 prompt_text = '#eeeeee'
 red = '#ff7f7b'
-orange = '#ffbf70'
+orange = '#ffb961'
 yellow = '#ffd67c'
 green = '#beda78'
-cyan = '#bed6ff'
+cyan = '#a1e6e0'
 blue = '#90bee1'
 purple = '#efb3f7'
 magenta = '#ff93b3'
