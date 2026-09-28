@@ -1,7 +1,8 @@
 #!/usr/bin/env lua
 
 local cwd = arg[1]
-local variant = arg[2]
+local format = arg[2]
+local color_override = arg[3]
 
 local function git_branch()
 	local success, b = pcall(function()
@@ -16,10 +17,16 @@ local function git_branch()
 		return ""
 	end
 
-	local output = " @" .. b
-	if variant == "unfocused" then
-		output = "#[fg=#474747]" .. output .. "#[fg=default]"
+	local output = b
+
+	if format ~= nil then
+		output = string.format(format, b)
 	end
+
+	if color_override ~= nil then
+		output = "#[fg=" .. color_override .. "]" .. output .. "#[fg=default]"
+	end
+
 	return output
 end
 

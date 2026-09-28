@@ -1,43 +1,44 @@
 #!/usr/bin/env lua
 
 local cwd = arg[1]
-local variant = arg[2]
+local format = arg[2]
+local color_override = arg[3]
 
 local states = {
 	{
 		found = false,
 		label = "M",
-		color = "#ffd67c",
+		color = os.getenv("YELLOW"),
 	},
 	{
 		found = false,
 		label = "?",
-		color = "#beda78",
+		color = os.getenv("GREEN"),
 	},
 	{
 		found = false,
 		label = "A",
-		color = "#beda78",
+		color = os.getenv("GREEN"),
 	},
 	{
 		found = false,
 		label = "R",
-		color = "#ffd67c",
+		color = os.getenv("YELLOW"),
 	},
 	{
 		found = false,
 		label = "C",
-		color = "#beda78",
+		color = os.getenv("GREEN"),
 	},
 	{
 		found = false,
 		label = "D",
-		color = "#ff7f7b",
+		color = os.getenv("RED"),
 	},
 	{
 		found = false,
 		label = "T",
-		color = "#a1e6e0",
+		color = os.getenv("CYAN"),
 	},
 }
 
@@ -45,28 +46,28 @@ local contexts = {
 	MERGE_CONFLICT = {
 		found = false,
 		label = "!",
-		color = "#ff7f7b",
+		color = os.getenv("RED"),
 	},
 	STASHED = {
 		found = false,
 		label = "$",
-		color = "#ffb961",
+		color = os.getenv("ORANGE"),
 	},
 	STAGED = {
 		found = false,
 		label = "S",
-		color = "#90bee1",
+		color = os.getenv("BLUE"),
 	},
 }
 
 local offsets = {
 	AHEAD = {
 		label = "+",
-		color = "#ff93b3",
+		color = os.getenv("MAGENTA"),
 	},
 	BEHIND = {
 		label = "-",
-		color = "#ff93b3",
+		color = os.getenv("MAGENTA"),
 	},
 }
 
@@ -143,41 +144,54 @@ local function format_status()
 		end
 	end
 
-	local STATUS_SIZE = 10
-
 	table.sort(states, function(a, b)
 		return a.label < b.label
 	end)
 
 	local output = ""
+	local STATUS_SIZE = 10
 
 	if tonumber(ahead) > 0 then
-		local c = variant == "unfocused" and "#474747" or offsets.AHEAD.color
-		output = output .. "#[fg=" .. c .. "]" .. offsets.AHEAD.label .. ahead .. "#[fg=default]"
+		if color_override ~= nil then
+			output = output .. offsets.AHEAD.label .. ahead
+		else
+			output = output .. "#[fg=" .. offsets.AHEAD.color .. "]" .. offsets.AHEAD.label .. ahead .. "#[fg=default]"
+		end
 	elseif tonumber(behind) > 0 then
-		local c = variant == "unfocused" and "#474747" or offsets.BEHIND.color
-		output = output .. "#[fg=" .. c .. "]" .. offsets.BEHIND.label .. behind .. "#[fg=default]"
-	end
-
-	for _, t in pairs(states) do
-		if t.found then
-			local c = variant == "unfocused" and "#474747" or t.color
+		if color_override ~= nil then
+			output = output .. offsets.BEHIND.label .. behind
+		else
 			output = output
 				.. "#[fg="
-				.. c
+				.. offsets.BEHIND.color
 				.. "]"
-				.. string.sub(t.label, 1, math.floor(STATUS_SIZE / num_statuses))
+				.. offsets.BEHIND.label
+				.. behind
 				.. "#[fg=default]"
 		end
 	end
 
-	if variant == "unfocused" then
-		output = "#[fg=#474747][#[fd=default]" .. output .. "#[fg=#474747]]#[fg=default]"
-	else
-		output = "[" .. output .. "]"
+	for _, t in pairs(states) do
+		if t.found then
+			if color_override ~= nil then
+				output = output .. string.sub(t.label, 1, math.floor(STATUS_SIZE / num_statuses))
+			else
+				output = output
+					.. "#[fg="
+					.. t.color
+					.. "]"
+					.. string.sub(t.label, 1, math.floor(STATUS_SIZE / num_statuses))
+					.. "#[fg=default]"
+			end
+		end
 	end
 
-	output, _ = output:gsub("\n", "")
+	-- remove newlines, and format string if specified
+	output, _ = (format ~= nil and string.format(format, output) or output):gsub("\n", "")
+	if color_override ~= nil then
+		output = "#[fg=" .. color_override .. "]" .. output .. "#[fg=default]"
+	end
+
 	return output
 end
 

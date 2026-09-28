@@ -3,6 +3,7 @@
 
 -- arbitrary input sanitization
 local s = arg[1]
+local format = arg[2]
 if string.find(s, "python") then
 	s = "python"
 end
@@ -50,4 +51,10 @@ local icons = {
 	flatpak = "󰏖",
 }
 
-io.stdout:write(icons[s] or "")
+local output = icons[s] or ""
+
+if format ~= nil then
+	output = string.format(format, output)
+end
+
+io.stdout:write(output)
