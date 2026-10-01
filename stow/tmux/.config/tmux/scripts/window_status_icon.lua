@@ -1,16 +1,19 @@
 #!/usr/bin/env lua
--- I understand this is not the most portable language for this endeavor.
 
--- arbitrary input sanitization
 local s = arg[1]
 local format = arg[2]
+
+-- arbitrary input sanitization
 if string.find(s, "python") then
 	s = "python"
 end
 
--- find use for  ?
+local DEFAULT_ICON = ""
+
 local icons = {
-	-- languages, etc.
+	---------------
+	-- LANGUAGES --
+	---------------
 	sh = "",
 	csh = "%",
 	zsh = "",
@@ -19,7 +22,9 @@ local icons = {
 	fish = ">", -- alternatives include "󰻳" "󰈺" "" "" ""
 	lua = "",
 	python = "",
-	-- development/editors
+	-----------------
+	-- DEVELOPMENT --
+	-----------------
 	nvim = "",
 	emacs = "",
 	nano = "",
@@ -29,7 +34,9 @@ local icons = {
 	git = "󰊢",
 	tmux = "",
 	["[tmux]"] = "", -- in practice, doesn't seem to appear often
-	-- GNU(-like) utilities
+	---------------
+	-- UTILITIES --
+	---------------
 	sudo = "",
 	cp = "",
 	rm = "",
@@ -42,7 +49,6 @@ local icons = {
 	ssh = "󰌘",
 	history = "",
 	ping = "󰀃",
-	-- non-default tools
 	fd = "",
 	rg = "",
 	fzf = "",
@@ -51,7 +57,7 @@ local icons = {
 	flatpak = "󰏖",
 }
 
-local output = icons[s] or ""
+local output = icons[s] or DEFAULT_ICON
 
 if format ~= nil then
 	output = string.format(format, output)
