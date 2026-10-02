@@ -109,6 +109,13 @@ local function format_status()
 		return ""
 	end
 
+	local function apply_fg_if_no_override(str, color)
+		if color_override == nil then
+			return "#[fg=" .. color .. "]" .. str .. "#[fg=default]"
+		end
+		return str
+	end
+
 	local lines = {}
 
 	for match in string.gmatch(git_status, "([^\n]+)") do
@@ -137,52 +144,21 @@ local function format_status()
 		table.insert(states, v)
 	end
 
-	local num_statuses = 0
-	for _, t in ipairs(states) do
-		if t.found then
-			num_statuses = num_statuses + 1
-		end
-	end
-
 	table.sort(states, function(a, b)
 		return a.label < b.label
 	end)
 
 	local output = ""
-	local STATUS_SIZE = 10
 
 	if tonumber(ahead) > 0 then
-		if color_override ~= nil then
-			output = output .. offsets.AHEAD.label .. ahead
-		else
-			output = output .. "#[fg=" .. offsets.AHEAD.color .. "]" .. offsets.AHEAD.label .. ahead .. "#[fg=default]"
-		end
+		output = output .. apply_fg_if_no_override(offsets.AHEAD.label .. ahead, offsets.AHEAD.color)
 	elseif tonumber(behind) > 0 then
-		if color_override ~= nil then
-			output = output .. offsets.BEHIND.label .. behind
-		else
-			output = output
-				.. "#[fg="
-				.. offsets.BEHIND.color
-				.. "]"
-				.. offsets.BEHIND.label
-				.. behind
-				.. "#[fg=default]"
-		end
+		output = output .. apply_fg_if_no_override(offsets.BEHIND.label .. behind, offsets.BEHIND.color)
 	end
 
 	for _, t in pairs(states) do
 		if t.found then
-			if color_override ~= nil then
-				output = output .. string.sub(t.label, 1, math.floor(STATUS_SIZE / num_statuses))
-			else
-				output = output
-					.. "#[fg="
-					.. t.color
-					.. "]"
-					.. string.sub(t.label, 1, math.floor(STATUS_SIZE / num_statuses))
-					.. "#[fg=default]"
-			end
+			output = output .. apply_fg_if_no_override(t.label, t.color)
 		end
 	end
 
