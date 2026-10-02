@@ -5,6 +5,6 @@ return {
     ---@type ibl.config
     opts = {
         indent = { char = "▏", smart_indent_cap = true, highlight = "CustomIndentBlanklineIndent" },
-        scope = { highlight = "CustomIndentBlanklineScope" },
+        scope = { show_start = false, show_end = false, highlight = "CustomIndentBlanklineScope" },
     },
 }
