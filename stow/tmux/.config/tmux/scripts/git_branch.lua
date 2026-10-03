@@ -1,6 +1,7 @@
 #!/usr/bin/env lua
 
 local cwd = arg[1]
+-- format expects %s
 local format = arg[2]
 local color_override = arg[3]
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env lua
 
 local s = arg[1]
+-- format expects %s
 local format = arg[2]
 
 -- arbitrary input sanitization
