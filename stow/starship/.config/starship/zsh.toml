@@ -14,7 +14,7 @@ $status\
 """
 
 add_newline = false
-palette = 'decaf'
+palette = 'half'
 
 [palettes.half]
 black = '#171717'
