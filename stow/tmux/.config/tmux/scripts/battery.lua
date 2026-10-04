@@ -39,57 +39,12 @@ local function battery_stats(dirent)
 end
 
 local function percent_to_icon(p, s)
-	local i = "󰁹"
+	local step = math.floor(p / 10)
 	if s == "Discharging" then
-		if p < 10 then
-			i = "󰂃"
-		elseif p < 20 then
-			i = "󰁺"
-		elseif p < 30 then
-			i = "󰁻"
-		elseif p < 40 then
-			i = "󰁼"
-		elseif p < 50 then
-			i = "󰁽"
-		elseif p < 60 then
-			i = "󰁾"
-		elseif p < 70 then
-			i = "󰁿"
-		elseif p < 80 then
-			i = "󰂀"
-		elseif p < 90 then
-			i = "󰂁"
-		elseif p < 100 then
-			i = "󰂂"
-		else
-			i = "󰁹"
-		end
-	else
-		if p < 10 then
-			i = "󰢟"
-		elseif p < 20 then
-			i = "󰢜"
-		elseif p < 30 then
-			i = "󰂆"
-		elseif p < 40 then
-			i = "󰂇"
-		elseif p < 50 then
-			i = "󰂈"
-		elseif p < 60 then
-			i = "󰢝"
-		elseif p < 70 then
-			i = "󰂉"
-		elseif p < 80 then
-			i = "󰢞"
-		elseif p < 90 then
-			i = "󰂊"
-		elseif p < 100 then
-			i = "󰂋"
-		else
-			i = "󰂅"
-		end
+		return string.sub("󰂃󰁺󰁻󰁼󰁽󰁾󰁿󰂀󰂁󰂂󰁹", 1 + step * 4, 4 + step * 4)
+	elseif s == "Charging" then
+		return string.sub("󰢟󰢜󰂆󰂇󰂈󰢝󰂉󰢞󰂊󰂋󰂅", 1 + step * 4, 4 + step * 4)
 	end
-	return i
 end
 
 local function battery()
