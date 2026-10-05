@@ -59,20 +59,21 @@ local function battery()
 		return ""
 	end
 
+	local icon = percent_to_icon(percent, status)
+	if status == "Charging" then
+		icon = "#[fg=" .. os.getenv("GREEN") .. "]" .. icon .. "#[fg=default]"
+	elseif percent < 10 then
+		icon = "#[fg=" .. os.getenv("RED") .. "]" .. icon .. "#[fg=default]"
+	elseif percent < 25 then
+		icon = "#[fg=" .. os.getenv("ORANGE") .. "]" .. icon .. "#[fg=default]"
+	end
+
 	local output = ""
 
 	if format ~= nil then
-		output = string.format(format, percent_to_icon(percent, status), percent)
+		output = string.format(format, icon, percent)
 	else
-		output = " " .. percent_to_icon(percent, status) .. " " .. tostring(percent) .. "% "
-	end
-
-	if status == "Charging" then
-		output = "#[fg=" .. os.getenv("GREEN") .. "]" .. output .. "#[fg=default]"
-	elseif percent <= 15 then
-		output = "#[fg=" .. os.getenv("RED") .. "]" .. output .. "#[fg=default]"
-	elseif percent <= 25 then
-		output = "#[fg=" .. os.getenv("ORANGE") .. "]" .. output .. "#[fg=default]"
+		output = " " .. icon .. " " .. tostring(percent) .. "% "
 	end
 
 	return output
