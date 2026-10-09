@@ -70,7 +70,7 @@ if status is-interactive
         alias gs "git status"
         alias gf "git fetch"
         alias gpl "git pull"
-        alias gps "git pull"
+        alias gps "git push"
         alias gst "git stash"
     end
 
