@@ -68,8 +68,9 @@ if status is-interactive
         alias ga "git add"
         alias gc "git commit"
         alias gs "git status"
-        alias gp "git pull"
         alias gf "git fetch"
+        alias gpl "git pull"
+        alias gps "git pull"
         alias gst "git stash"
     end
 

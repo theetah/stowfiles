@@ -63,8 +63,9 @@ alias py="python3"
 alias ga="git add"
 alias gc="git commit"
 alias gs="git status"
-alias gp="git pull"
 alias gf="git fetch"
+alias gpl="git pull"
+alias gps="git push"
 alias gst="git stash"
 
 # Conditional Aliases
