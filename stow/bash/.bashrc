@@ -18,6 +18,12 @@ export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 # export SYSTEMD_PAGER=
 
 alias la="ls -A"
+alias ga="git add"
+alias gc="git commit"
+alias gs="git status"
+alias gp="git pull"
+alias gf="git fetch"
+alias gst="git stash"
 
 # User specific aliases and functions
 if [ -d ~/.bashrc.d ]; then

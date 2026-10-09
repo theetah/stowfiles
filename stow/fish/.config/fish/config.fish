@@ -64,6 +64,15 @@ if status is-interactive
     alias sudo "sudo "
     alias doas "doas "
 
+    if command -q git
+        alias ga "git add"
+        alias gc "git commit"
+        alias gs "git status"
+        alias gp "git pull"
+        alias gf "git fetch"
+        alias gst "git stash"
+    end
+
     if command -q eza
         alias ls "eza --icons --group-directories-first"
         alias ll "eza --icons -l --group-directories-first"

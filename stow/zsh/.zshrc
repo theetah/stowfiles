@@ -60,6 +60,13 @@ alias xr="xbps-remove -R"
 alias fp="flatpak"
 alias py="python3"
 
+alias ga="git add"
+alias gc="git commit"
+alias gs="git status"
+alias gp="git pull"
+alias gf="git fetch"
+alias gst="git stash"
+
 # Conditional Aliases
 
 if command -v eza >/dev/null 2>&1; then
