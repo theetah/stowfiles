@@ -44,6 +44,11 @@ zinit light zsh-users/zsh-autosuggestions
 ### USER CONFIG ###
 ###################
 
+# initialize fzf if it exists
+if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --zsh)
+fi
+
 # Exports
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools

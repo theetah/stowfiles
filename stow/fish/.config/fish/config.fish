@@ -99,6 +99,7 @@ if status is-interactive
 
     set fish_greeting ''
 
+    fzf --fish | source
     starship init fish | source
 
 end

@@ -40,6 +40,7 @@ bind '"\C-d"': ""
 
 # export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml:$HOME/.config/starship/bash.toml"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+eval "$(fzf --bash)"
 eval "$(starship init bash)"
 
 # This snippet allows the shell to be attached to the session,
