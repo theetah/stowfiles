@@ -57,6 +57,11 @@ if status is-interactive
     # set -gx STARSHIP_CONFIG "$HOME/.config/starship/starship.toml:$HOME/.config/starship/fish.toml"
     set -gx STARSHIP_CONFIG "$HOME/.config/starship/fish.toml"
     # use only -x if you want the variable local to current session and child processes
+    set -gx FZF_DEFAULT_OPTS "
+      --color=fg:#bbbbbb,fg+:#dddddd,bg:#1f1f1f,bg+:#242424
+      --color=hl:#90bee1,hl+:#bed6ff,info:#676767,marker:#a1e6e0
+      --color=prompt:#beda78,spinner:#efb3f7,pointer:#beda78,header:#87afaf
+      --color=border:#474747,label:#bbbbbb,query:#cccccc"
 
     # alias mint "env -u WAYLAND_DISPLAY /usr/bin/"
 

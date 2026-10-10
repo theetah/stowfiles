@@ -47,6 +47,11 @@ zinit light zsh-users/zsh-autosuggestions
 # initialize fzf if it exists
 if command -v fzf >/dev/null 2>&1; then
   source <(fzf --zsh)
+  export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+    --color=fg:#bbbbbb,fg+:#dddddd,bg:#1f1f1f,bg+:#242424
+    --color=hl:#90bee1,hl+:#bed6ff,info:#676767,marker:#a1e6e0
+    --color=prompt:#beda78,spinner:#efb3f7,pointer:#beda78,header:#87afaf
+    --color=border:#474747,label:#bbbbbb,query:#cccccc'
 fi
 
 # Exports

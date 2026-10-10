@@ -41,6 +41,11 @@ bind '"\C-d"': ""
 # export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml:$HOME/.config/starship/bash.toml"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(fzf --bash)"
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  --color=fg:#bbbbbb,fg+:#dddddd,bg:#1f1f1f,bg+:#242424
+  --color=hl:#90bee1,hl+:#bed6ff,info:#676767,marker:#a1e6e0
+  --color=prompt:#beda78,spinner:#efb3f7,pointer:#beda78,header:#87afaf
+  --color=border:#474747,label:#bbbbbb,query:#cccccc'
 eval "$(starship init bash)"
 
 # This snippet allows the shell to be attached to the session,
