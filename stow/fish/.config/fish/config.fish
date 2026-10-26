@@ -3,7 +3,7 @@
 #############################
 set -gx EDITOR /usr/bin/nvim
 set -gx DOTNET_ROOT $HOME/.dotnet
-set -gx JAVA_HOME "/usr/lib/jvm/openjdk21/"
+set -gx JAVA_HOME "/usr/lib/jvm/openjdk17/"
 set -gx ANDROID_HOME "$HOME/android-sdk"
 set -gx BAT_THEME "ansi"
 # obtained from running `dircolors -b` in zsh.
@@ -23,6 +23,7 @@ set -gx FZF_DEFAULT_OPTS "
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.dotnet
 fish_add_path $HOME/.dotnet/tools
+fish_add_path $HOME/android-sdk/emulator
 fish_add_path $HOME/android-sdk/cmdline-tools/latest/bin
 
 if status is-interactive
